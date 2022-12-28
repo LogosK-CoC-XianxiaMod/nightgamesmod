@@ -61,7 +61,7 @@ public class Energized extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s with energy.\n", affected.subjectAction("now pulse", "now pulses"));
     }
 

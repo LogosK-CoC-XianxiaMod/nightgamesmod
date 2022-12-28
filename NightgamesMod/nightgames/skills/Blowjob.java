@@ -143,10 +143,10 @@ public class Blowjob extends Skill {
         if (modifier == Result.miss) {
             m = "You try to take " + target.getName() + "'s penis into your mouth, but she manages to pull away.";
         }
-        if (target.getArousal().get() < 15) {
+        if (target.arousal.get() < 15) {
             m = "You suck on " + target.nameOrPossessivePronoun()
                             + " flaccid little penis until it grows into an intimidating large erection.";
-        } else if (target.getArousal().percent() >= 90) {
+        } else if (target.arousal.percent() >= 90) {
             m = target.getName()
                             + "'s girl-cock seems ready to burst, so you suck on it strongly and attack the glans with your tongue fiercely.";
         } else if (modifier == Result.special) {
@@ -188,11 +188,11 @@ public class Blowjob extends Skill {
             m += String.format("Faced with %s dick sitting squarely in front of %s face, %s"
                             + " obediently tongues %s cock in defeat.", target.nameOrPossessivePronoun(),
                             getSelf().nameOrPossessivePronoun(), getSelf().pronoun(), target.possessiveAdjective());
-        } else if (target.getArousal().get() < 15) {
+        } else if (target.arousal.get() < 15) {
             m += String.format("%s %s soft penis into %s mouth and sucks on it until it hardens.",
                             getSelf().subjectAction("take"), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective());
-        } else if (target.getArousal().percent() >= 90) {
+        } else if (target.arousal.percent() >= 90) {
             m += String.format("%s up the precum leaking from %s cock and %s the entire length into %s mouth, sucking relentlessly.",
                             getSelf().subjectAction("lap"), target.nameOrPossessivePronoun(), getSelf().action("take"),
                             getSelf().possessiveAdjective());

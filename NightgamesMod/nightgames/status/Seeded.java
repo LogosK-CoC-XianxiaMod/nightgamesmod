@@ -30,7 +30,7 @@ public class Seeded extends Status implements InsertedStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         BodyPart hole = affected.body.getRandom(target);
         if (hole == null) {
             return "";
@@ -102,7 +102,7 @@ public class Seeded extends Status implements InsertedStatus {
                                     + "{self:possessive} mind blanks out as every thought is replaced with a feral need to mate.",
                             affected, other, hole.describe(affected)));
             affected.heal(c, 100, " (Seedling)");
-            affected.arouse(Math.max(Global.random(50, 100), affected.getArousal().max() / 4), c,
+            affected.arouse(Math.max(Global.random(50, 100), affected.arousal.max() / 4), c,
                             other.nameOrPossessivePronoun() + " seedling");
             affected.body.pleasure(other, seed, hole, Global.random(10, 20) + other.get(Attribute.Bio) / 2, c);
             affected.add(c, new Frenzied(other, 1000));

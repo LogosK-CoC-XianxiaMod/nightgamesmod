@@ -35,10 +35,10 @@ public class Angel extends BasePersonality {
     private int dominance=0;
 
     public Angel() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Angel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Angel(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Angel", true);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -58,10 +58,10 @@ public class Angel extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Perception, 1);
         Global.gainSkills(self);
 
-        self.getStamina().setMax(60);
-        self.getArousal().setMax(110);
+        self.stamina.setMax(60);
+        self.arousal.setMax(110);
 
-        self.setTrophy(Item.AngelTrophy);
+        self.trophy = Item.AngelTrophy;
         self.body.add(new BreastsPart(Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(0.3, 4.2));
@@ -396,7 +396,7 @@ public class Angel extends BasePersonality {
                             + "stand and ready yourself to move on. You wouldn't put past Angel to tell her girlfriends regardless of how well you performed, you just hope that's as "
                             + "far as that information goes.";
         } else if (c.getStance().inserted(character)
-            && character.getWillpower().percent() < 0.5) {
+            && character.willpower.percent() < 0.5) {
             dominance += 1;
 
             message = "Angel stares you in the eye, while expertly thrusting in and out of your slobbering pussy. Your needy cunt quivers as she leans close and gives you a long steamy kiss, "
@@ -408,7 +408,7 @@ public class Angel extends BasePersonality {
                             + "in long leisurely strokes. <i>\"Hmm in fact, why don't I train you a bit? You know what they say, practice makes perfect!\" "
                             + "You groan in frustration as your oversensitive cunt receives her cock again. "
                             + "<br/><br/>This could be a long night.";
-        } else if (c.getStance().inserted(character) && character.getWillpower().percent()>=0.5 && dominance>=10) {
+        } else if (c.getStance().inserted(character) && character.willpower.percent()>=0.5 && dominance>=10) {
             dominance+=1;
 
             minDominance=10;
@@ -641,7 +641,7 @@ public class Angel extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina()
+        return !character.mostlyNude() && character.stamina
                                                    .percent() >= 50;
     }
 

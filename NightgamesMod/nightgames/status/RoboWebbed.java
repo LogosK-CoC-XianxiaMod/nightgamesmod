@@ -14,7 +14,7 @@ public class RoboWebbed extends Bound {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return "";
     }
 
@@ -44,7 +44,7 @@ public class RoboWebbed extends Bound {
     }
 
     private int arousalInflicted() {
-        return (int) (affected.getArousal().max() * .25);
+        return (int) (affected.arousal.max() * .25);
     }
 
     @Override

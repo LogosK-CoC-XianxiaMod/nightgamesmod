@@ -34,7 +34,7 @@ public class StripSelf extends Skill {
 
     @Override
     public Collection<String> subChoices(Combat c) {
-        return getSelf().getOutfit().getAllStrippable().stream().map(clothing -> clothing.getName())
+        return getSelf().outfit.getAllStrippable().stream().map(clothing -> clothing.getName())
                         .collect(Collectors.toList());
     }
 
@@ -54,10 +54,10 @@ public class StripSelf extends Skill {
             return false;
         }
         if (getSelf().human()) {
-            Optional<Clothing> stripped = getSelf().getOutfit().getEquipped().stream()
+            Optional<Clothing> stripped = getSelf().outfit.getEquipped().stream()
                             .filter(article -> article.getName().equals(getChoice())).findAny();
             if (stripped.isPresent()) {
-                clothing = getSelf().getOutfit().unequip(stripped.get());
+                clothing = getSelf().outfit.unequip(stripped.get());
                 c.getCombatantData(getSelf()).addToClothesPile(getSelf(), clothing);
             }
         } else if (getSelf() instanceof NPC) {
@@ -65,7 +65,7 @@ public class StripSelf extends Skill {
             HashMap<Clothing, Double> checks = new HashMap<>();
             double selfFit = self.getFitness(c);
             double otherFit = self.getOtherFitness(c, target);
-            getSelf().getOutfit().getAllStrippable().stream().forEach(article -> {
+            getSelf().outfit.getAllStrippable().stream().forEach(article -> {
                 double rating = Decider.rateAction(self, c, selfFit, otherFit, (newCombat, newSelf, newOther) -> {
                     newSelf.strip(article, newCombat);
                     return true;

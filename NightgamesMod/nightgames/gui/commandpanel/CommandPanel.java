@@ -151,6 +151,7 @@ public class CommandPanel extends JFXPanel {
             outerPane.setRight(rightButtonPane);
             outerPane.setBottom(backButtonPane);
             outerPane.setOnKeyPressed(event -> {
+                System.out.println(event.getCode());
                 switch (event.getCode()) {
                     case UP: {
                         if (submitButton.isVisible()) {

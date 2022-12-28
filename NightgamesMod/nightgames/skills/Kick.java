@@ -44,7 +44,7 @@ public class Kick extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (!target.getOutfit().slotUnshreddable(ClothingSlot.bottom) && getSelf().get(Attribute.Ki) >= 14
+        if (!target.outfit.slotUnshreddable(ClothingSlot.bottom) && getSelf().get(Attribute.Ki) >= 14
                         && Global.random(3) == 2) {
             writeOutput(c, Result.special, target);
             target.shred(ClothingSlot.bottom);
@@ -113,7 +113,7 @@ public class Kick extends Skill {
         }
         if (modifier == Result.special) {
             return "You focus your ki into a single kick, targeting not " + target.getName() + "'s body, but her "
-                            + target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                            + target.outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                             + ". The garment is completely destroyed, but "
                             + "she is safely left completely unharmed. Wait, you are actually fighting right now, aren't you?";
         }
@@ -137,7 +137,7 @@ public class Kick extends Skill {
                             + "just before impact. {other:pronoun-action:feel|feels} a chill run down {other:possessive} spine and {other:possessive} {other:balls-vulva} "
                             + "are grateful for the last second reprieve. {other:POSSESSIVE} %s crumble off {other:possessive} body,"
                             + " practically disintegrating.... Still somewhat grateful.", getSelf(), target,
-                            target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName());
+                            target.outfit.getTopOfSlot(ClothingSlot.bottom).getName());
         }
         if (modifier == Result.strong) {
             return Global.format("With {other:name-do} flat on {other:possessive} back, {self:subject-action:quickly move|quickly moves} in to press {self:possessive} advantage. "

@@ -1,22 +1,28 @@
 package nightgames.status;
 
 import nightgames.characters.Character;
+import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.requirements.DurationRequirement;
+import nightgames.requirements.Requirement;
+
+import java.util.ArrayList;
 
 public abstract class DurationStatus extends Status {
     private DurationRequirement req;
 
     public DurationStatus(String name, Character affected, int duration) {
         super(name, affected);
-        if (affected != null && affected.has(Trait.PersonalInertia)) {
+        if (affected.has(Trait.PersonalInertia)) {
             duration = Math.round(1.33f * duration);
         }
         req = new DurationRequirement(duration);
 
-        requirements.add(req);
+        ((ArrayList<Requirement>)requirements).add((Requirement)req);
     }
+
+    public static NPC dummyNPCForInit = new NPC("dummy", -1, null);
 
     public int getDuration() {
         return req.remaining();

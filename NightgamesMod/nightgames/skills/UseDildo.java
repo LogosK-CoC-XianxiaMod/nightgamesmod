@@ -45,7 +45,7 @@ public class UseDildo extends Skill {
             if (getSelf().has(Item.Dildo3)) {
                 writeOutput(c, Result.strapon, target);
                 m = Global.random(10, 11);
-                target.getOutfit().equip(Clothing.getByID("insertedDildo3"));
+                target.outfit.equip(Clothing.getByID("insertedDildo3"));
             } else if (getSelf().has(Item.Dildo2)) {
                 writeOutput(c, Result.upgrade, target);
                 m = Global.random(10, 20);

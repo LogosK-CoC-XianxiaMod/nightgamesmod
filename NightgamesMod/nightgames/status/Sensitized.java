@@ -32,8 +32,8 @@ public class Sensitized extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (replacement.isPresent())
+    public String initialMessage(Combat c, Status replacement) {
+        if (replacement != null)
             return "";
         return Global.format(String.format("{self:NAME-POSSESSIVE} groans as {self:possessive} %s grows hot.",
                         part.describe(affected)), affected, c.getOpponentCharacter(affected));

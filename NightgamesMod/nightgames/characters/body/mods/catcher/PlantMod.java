@@ -17,7 +17,7 @@ public class PlantMod extends CatcherMod {
     }
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
-        if (damage > self.getArousal().max()/ 5.0 && Global.random(4) == 0) {
+        if (damage > self.arousal.max()/ 5.0 && Global.random(4) == 0) {
             var model = JtwigModel.newModel()
                 .with("self", self)
                 .with("opponent", opponent)

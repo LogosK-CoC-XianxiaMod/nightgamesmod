@@ -29,7 +29,7 @@ public class Feral extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s turned feral.\n", affected.subjectAction("have", "has"));
     }
 
@@ -54,7 +54,7 @@ public class Feral extends Status {
 
     @Override
     public int regen(Combat c) {
-        if (affected.getArousal().percent() < 40) {
+        if (affected.arousal.percent() < 40) {
             affected.removelist.add(this);
         }
         int ignoreOrgasmChance = Math.max(3, 8 - affected.get(Attribute.Animism) / 20);

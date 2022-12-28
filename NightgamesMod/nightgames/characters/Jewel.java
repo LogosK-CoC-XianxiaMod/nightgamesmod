@@ -40,10 +40,10 @@ public class Jewel extends BasePersonality {
     public static final String JEWEL_PHYSICAL_FOCUS = "JewelPhysicalFocus";
 
     public Jewel() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Jewel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Jewel(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Jewel", true);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -52,7 +52,7 @@ public class Jewel extends BasePersonality {
         character.addPersonalStrategy(new FacesitStrategy());
         character.addPersonalStrategy(new KnockdownStrategy());
         character.addPersonalStrategy(new StraponStrategy());
-        getCharacter().addPersonalStrategy(new ReceiveAnalStrategy());
+        character.addPersonalStrategy(new ReceiveAnalStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
@@ -73,7 +73,7 @@ public class Jewel extends BasePersonality {
         self.getMojo()
             .setMax(80);
 
-        self.setTrophy(Item.JewelTrophy);
+        self.trophy = Item.JewelTrophy;
         self.body.add(new BreastsPart(BreastsPart.Size.CCup));
 
         // fairly feminine face
@@ -210,8 +210,8 @@ public class Jewel extends BasePersonality {
         growth.addTrait(31, Trait.holecontrol);
         growth.addTrait(34, Trait.exhibitionist);
         // 37 - Choice 1, trait 3
-        character.getStamina().setMax(100);
-        character.getArousal().setMax(70);
+        character.stamina.setMax(100);
+        character.arousal.setMax(70);
         // 39 - Choice 2, trait 2
 
         growth.addTrait(43, Trait.analTraining2);
@@ -529,7 +529,7 @@ public class Jewel extends BasePersonality {
                                 + "For a moment, she just looks at you as you're panting from exertion as if considering asking for more. Then she looks away and sighs. "
                                 + "<i>\"That's disappointing. I was hoping you would be a real challenge. I suppose I'm just too strong for you.\"</i>";
             }
-            if (character.orgasms > 0 || character.getArousal().percent() > 50) {
+            if (character.orgasms > 0 || character.arousal.percent() > 50) {
                 character.arousal.renew();
                 if (other.hasDick()) {
                     message += "<i>\"Still, you were at least able to turn me on this much. Maybe you deserve a "

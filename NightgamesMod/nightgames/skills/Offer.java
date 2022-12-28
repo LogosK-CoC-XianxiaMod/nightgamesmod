@@ -43,7 +43,7 @@ public class Offer extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (target.getArousal().get() < 15) {
+        if (target.arousal.get() < 15) {
             writeOutput(c, Result.miss, target);
             getSelf().add(c, new Shamed(getSelf()));
             if (target.hasDick() || target.has(Trait.strapped)) {

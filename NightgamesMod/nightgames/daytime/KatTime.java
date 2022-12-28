@@ -329,7 +329,8 @@ public class KatTime extends BaseNPCTime {
             }
             choices.add("Leave");
             Global.getPlayer().addict(null, AddictionType.BREEDER, npc, Addiction.MED_INCREASE);
-            Global.getPlayer().getAddiction(AddictionType.BREEDER).ifPresent(Addiction::flagDaytime);
+            Addiction mc = Global.getPlayer().getAddiction(AddictionType.BREEDER);
+            if (mc != null) mc.flagDaytime();
         }
         if (choice.equals("Sex")) {
             Global.gui().message(

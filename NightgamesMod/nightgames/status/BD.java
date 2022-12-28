@@ -27,7 +27,7 @@ public class BD extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now affected by a bondage fetish.\n", affected.subjectAction("are", "is"));
     }
 
@@ -44,7 +44,7 @@ public class BD extends DurationStatus {
     @Override
     public void tick(Combat c) {
         if (affected.bound()) {
-            affected.arouse(affected.getArousal().max() / 20, c);
+            affected.arouse(affected.arousal.max() / 20, c);
         }
     }
 

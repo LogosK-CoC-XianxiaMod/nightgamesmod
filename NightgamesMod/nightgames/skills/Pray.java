@@ -20,8 +20,8 @@ public class Pray extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().getAddiction(AddictionType.ZEAL).map(addiction -> addiction.wasCausedBy(target))
-                        .orElse(false) && getSelf().canRespond();
+        Addiction zeal = getSelf().getAddiction(AddictionType.ZEAL);
+        return zeal != null && zeal.wasCausedBy(target) && getSelf().canRespond();
     }
 
     @Override
@@ -36,8 +36,7 @@ public class Pray extends Skill {
                                         + " whispering a quick prayer to Angel for guidance. {other:SUBJECT-ACTION:look} at {self:direct-object} strangely, but "
                                         + " the knowledge that Angel is there for {self:direct-object} reinvigorates {self:possessive} spirit"
                                         + " and strengthens {self:possessive} faith.", getSelf(), target));
-        int amt = Math.round((getSelf().getAddiction(AddictionType.ZEAL)
-                        .orElseThrow(() -> new SkillUnusableException(this)).getMagnitude() * 8));
+        int amt = Math.round((getSelf().getAddiction(AddictionType.ZEAL).getMagnitude() * 8));
         getSelf().restoreWillpower(c, amt);
         getSelf().addict(c, AddictionType.ZEAL, Global.getCharacterByType("Angel"), Addiction.LOW_INCREASE);
         return true;

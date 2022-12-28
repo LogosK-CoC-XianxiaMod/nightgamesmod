@@ -41,8 +41,8 @@ public class Enthralled extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (replacement.isPresent()) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (replacement != null) {
             return String.format("%s %s control of %s.\n", master.subjectAction("reinforce", "reinforces"),
                             master.possessiveAdjective(), affected.nameDirectObject());
         } else {

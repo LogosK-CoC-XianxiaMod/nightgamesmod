@@ -64,10 +64,11 @@ public class Drained extends Abuff {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         int newValue;
-        if (replacement.isPresent()) {
-            newValue = ((Drained)replacement.get()).value;
+        if (replacement != null) {
+
+            newValue = ((Drained)replacement).value;
         } else {
             newValue = this.value;
         }

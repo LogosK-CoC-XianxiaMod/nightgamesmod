@@ -38,7 +38,7 @@ public class TailPeg extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().getArousal().get() >= 30 && getSelf().canAct() && target.crotchAvailable()
+        return getSelf().arousal.get() >= 30 && getSelf().canAct() && target.crotchAvailable()
                         && c.getStance().en != Stance.standing && c.getStance().en != Stance.standingover
                         && (!target.is(Stsflag.debuff, "Tail Pegged") || !target.is(Stsflag.debuff, "Tail Fucked"));
     }

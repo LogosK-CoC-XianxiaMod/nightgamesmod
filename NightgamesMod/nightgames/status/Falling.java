@@ -35,7 +35,7 @@ public class Falling extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s knocked off balance.\n", affected.subjectAction("are", "is"));
     }
 

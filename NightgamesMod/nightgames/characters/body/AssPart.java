@@ -97,8 +97,8 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
     public double getHotness(Character self, Character opponent) {
         double hotness = super.getHotness(self, opponent);
 
-        Clothing top = self.getOutfit().getTopOfSlot(ClothingSlot.bottom);
-        hotness += -.1 + Math.sqrt(getSize().value) * .2 * self.getOutfit()
+        Clothing top = self.outfit.getTopOfSlot(ClothingSlot.bottom);
+        hotness += -.1 + Math.sqrt(getSize().value) * .2 * self.outfit
                                                 .getExposure(ClothingSlot.bottom);
         if (!opponent.hasDick()) {
             hotness /= 2;

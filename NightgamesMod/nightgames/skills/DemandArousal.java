@@ -33,8 +33,7 @@ public class DemandArousal extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        Addiction addict = target.getAddiction(AddictionType.MIND_CONTROL)
-                            .get();
+        Addiction addict = target.getAddiction(AddictionType.MIND_CONTROL);
         int dmg = (int) ((20 + Global.randomdouble() * 20) * addict.getMagnitude());
         float alleviation;
 

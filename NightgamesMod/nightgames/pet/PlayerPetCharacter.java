@@ -11,7 +11,7 @@ public class PlayerPetCharacter extends PetCharacter {
     private Player prototype;
 
     public PlayerPetCharacter(String name, Pet self, Character prototypeCharacter, int level) throws CloneNotSupportedException {
-        super(self, name, prototypeCharacter.getType() + "Pet", prototypeCharacter.getGrowth(), 1);
+        super(self, name, prototypeCharacter.type + "Pet", prototypeCharacter.getGrowth(), 1);
         prototype = (Player) prototypeCharacter.clone();
         prototype.applyBasicStats(this);
         for (int i = 1; i < level; i++) {
@@ -25,8 +25,8 @@ public class PlayerPetCharacter extends PetCharacter {
         this.getSkills().clear();
         this.body = prototypeCharacter.body.clone(this);
         this.outfit = new Outfit(prototypeCharacter.outfit);
-        getStamina().renew();
-        getArousal().renew();
+        stamina.renew();
+        arousal.renew();
         getMojo().renew();
         Global.learnSkills(this);
     }

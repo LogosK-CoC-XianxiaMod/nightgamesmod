@@ -19,7 +19,7 @@ public class Sacrifice extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canAct() && !c.getStance().sub(getSelf()) && getSelf().getArousal().percent() >= 70;
+        return getSelf().canAct() && !c.getStance().sub(getSelf()) && getSelf().arousal.percent() >= 70;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class Sacrifice extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         writeOutput(c, Result.normal, target);
-        getSelf().pain(c, getSelf(), getSelf().getStamina().max() / 3);                                   //Maso will have this backfire! LOL! -DSM
-        getSelf().calm(c, (getSelf().getArousal().max() / 3) + 20 + (2 * getSelf().get(Attribute.Dark)));       //Clarified Order of Operations, added 2* dark - DSM
+        getSelf().pain(c, getSelf(), getSelf().stamina.max() / 3);                                   //Maso will have this backfire! LOL! -DSM
+        getSelf().calm(c, (getSelf().arousal.max() / 3) + 20 + (2 * getSelf().get(Attribute.Dark)));       //Clarified Order of Operations, added 2* dark - DSM
         return true;
     }
 

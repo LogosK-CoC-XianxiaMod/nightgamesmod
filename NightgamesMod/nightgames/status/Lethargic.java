@@ -42,7 +42,7 @@ public class Lethargic extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s lethargic.\n", affected.subjectAction("are", "is"));
     }
 

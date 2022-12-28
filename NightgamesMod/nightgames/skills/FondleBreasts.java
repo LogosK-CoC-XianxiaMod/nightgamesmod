@@ -31,7 +31,7 @@ public class FondleBreasts extends Skill {
         Result result = Result.normal;
         if (target.roll(getSelf(), c, accuracy(c, target))) {
 
-            if (getSelf().getType().equals("Cassie") && target.body.getRandomBreasts().getSensitivity(target) > 4) {
+            if (getSelf().type.equals("Cassie") && target.body.getRandomBreasts().getSensitivity(target) > 4) {
 
                 result=Result.critical;
                 //c.write(getSelf(), deal(c, m, Result.critical, target));
@@ -91,7 +91,7 @@ public class FondleBreasts extends Skill {
             + "'s soft breasts and pinching her nipples.";
         } else {
             return "You massage " + target.getName() + "'s breasts over her "
-                            + target.getOutfit().getTopOfSlot(ClothingSlot.top).getName() + ".";
+                            + target.outfit.getTopOfSlot(ClothingSlot.top).getName() + ".";
         }
     }
 
@@ -121,7 +121,7 @@ public class FondleBreasts extends Skill {
             return String.format("%s massages %s %s over %s %s.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             target.body.getRandomBreasts().describe(target), target.possessiveAdjective(),
-                            target.getOutfit().getTopOfSlot(ClothingSlot.top).getName());
+                            target.outfit.getTopOfSlot(ClothingSlot.top).getName());
         }
     }
 

@@ -48,11 +48,11 @@ public class PressurePoint extends Skill {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             writeOutput(c, Result.normal, target);
             target.add(c, new PressurePointed(target));
-            getSelf().weaken(c, getSelf().getStamina().max() / 5);
+            getSelf().weaken(c, getSelf().stamina.max() / 5);
             return true;
         } else {
             writeOutput(c, Result.miss, target);
-            getSelf().weaken(c, getSelf().getStamina().max() / 5);
+            getSelf().weaken(c, getSelf().stamina.max() / 5);
             return false;
         }
     }

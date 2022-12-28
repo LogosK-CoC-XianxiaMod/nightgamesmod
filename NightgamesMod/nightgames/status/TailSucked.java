@@ -7,9 +7,11 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.requirements.Requirement;
 import nightgames.skills.TailSuck;
 import nightgames.skills.damage.DamageType;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class TailSucked extends Status implements InsertedStatus {
@@ -21,7 +23,7 @@ public class TailSucked extends Status implements InsertedStatus {
         super("Tail Sucked", affected);
         this.sucker = sucker;
         this.power = power;
-        requirements.add((c, self, other) -> c != null && self != null && other != null
+        ((ArrayList<Requirement>)requirements).add((c, self, other) -> c != null && self != null && other != null
                         && new TailSuck(other).usable(c, self));
         flag(Stsflag.bound);
         flag(Stsflag.debuff);
@@ -29,7 +31,7 @@ public class TailSucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s tail is sucking %s energy straight from %s %s.", sucker.nameOrPossessivePronoun(),
                         affected.nameOrPossessivePronoun(), affected.possessiveAdjective(),
                         affected.body.getRandomCock().describe(affected));

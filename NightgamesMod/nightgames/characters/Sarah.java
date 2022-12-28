@@ -24,10 +24,10 @@ public class Sarah extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
 
     public Sarah() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Sarah(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Sarah(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Sarah", false);
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
@@ -43,14 +43,14 @@ public class Sarah extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Cunning, 1);
         character.modAttributeDontSaveData(Attribute.Perception, 1);
         character.modAttributeDontSaveData(Attribute.Speed, 2);
-        character.getStamina().setMax(150);
-        character.getArousal().setMax(100);
+        character.stamina.setMax(150);
+        character.arousal.setMax(100);
         character.getProgression().setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(90);
 
-        character.setTrophy(Item.HolyWater);
+        character.trophy = Item.HolyWater;
         character.body.add(new BreastsPart(Size.DCup));
         character.initialGender = CharacterSex.female;
     }

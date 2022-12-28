@@ -36,7 +36,7 @@ public class NursesGloves extends Skill {
         } else {
             c.write(getSelf(), receive(c, 0, Result.normal, target));
         }
-        getSelf().getOutfit().equip(Clothing.getByID("nursesgloves"));
+        getSelf().outfit.equip(Clothing.getByID("nursesgloves"));
         getSelf().consume(Item.MedicalSupplies, 1);
 
         return true;

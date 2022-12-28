@@ -20,14 +20,14 @@ public class ViceGrip extends Tighten {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return havingSex(c, target) && (target.stunned() || target.getStamina().percent() < 25) && target.getArousal().percent() >= 50;
+        return havingSex(c, target) && (target.stunned() || target.stamina.percent() < 25) && target.arousal.percent() >= 50;
     }
 
     @Override
     public int[] getDamage(Combat c, Character target) {
         int[] result = new int[2];
 
-        int m = target.getArousal().max();
+        int m = target.arousal.max();
         result[0] = m;
         result[1] = 1;
 

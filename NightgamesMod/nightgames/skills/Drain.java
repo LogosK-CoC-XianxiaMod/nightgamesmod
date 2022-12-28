@@ -72,7 +72,7 @@ public class Drain extends Skill {
         writeOutput(c, type, Result.normal, target);
         switch (type) {
             case 0:
-                getSelf().arouse(getSelf().getArousal().max() / 4, c);
+                getSelf().arouse(getSelf().arousal.max() / 4, c);
             case 1:
                 target.drain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.drain, target, staminaStrength));
                 break;

@@ -50,10 +50,10 @@ public class Cassie extends BasePersonality {
     private int minDominance=0;
 
     public Cassie() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Cassie(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Cassie(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Cassie", true);
         character.plan = Plan.retreating;
         character.mood = Emotion.confident;
@@ -168,10 +168,10 @@ public class Cassie extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Cunning, 1);
         self.modAttributeDontSaveData(Attribute.Perception, 1);
 
-        self.getStamina().setMax(70);
-        self.getArousal().setMax(100);
+        self.stamina.setMax(70);
+        self.arousal.setMax(100);
         Global.gainSkills(self);
-        self.setTrophy(Item.CassieTrophy);
+        self.trophy = Item.CassieTrophy;
         self.body.add(new BreastsPart(BreastsPart.Size.CCup));
         self.body.add(new AssPart(Size.Flared));
         self.initialGender = CharacterSex.female;
@@ -269,7 +269,7 @@ public class Cassie extends BasePersonality {
     }
 
     @Override
-    public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
+    public Action.Instance move(Collection<? extends Action.Instance> available, Collection<Area> radar) {
         for (var act : available) {
             if (!character.is(Stsflag.energized) && act instanceof Energize.Instance) {
                 return act;
@@ -716,8 +716,8 @@ public class Cassie extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50
-                        && character.getArousal().percent() <= 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50
+                        && character.arousal.percent() <= 50;
     }
 
     public void advance() {

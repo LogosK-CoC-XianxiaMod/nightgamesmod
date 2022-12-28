@@ -13,6 +13,8 @@ import nightgames.stance.Stance;
 import nightgames.status.CrisisOfFaith;
 import nightgames.status.DivineCharge;
 import nightgames.status.Status;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Optional;
@@ -30,20 +32,22 @@ public class ZealAddiction extends Addiction {
         this(affected, cause, .01f);
     }
 
+    @NotNull
     @Override
-    protected Optional<Status> withdrawalEffects() {
-        return Optional.of(new CrisisOfFaith(affected));
+    protected Status withdrawalEffects() {
+        return new CrisisOfFaith(affected);
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
-        return Optional.of(this);
+    protected Status addictionEffects() {
+        return this;
     }
     
     @Override
-    public Optional<Status> startNight() {
-        Optional<Status> s = super.startNight();
-        if (!inWithdrawal && isActive()) {
+    public Status startNight() {
+        Status s = super.startNight();
+        if (!isInWithdrawal && isActive()) {
             shouldApplyDivineCharge = true;
         }
         return s;
@@ -55,9 +59,10 @@ public class ZealAddiction extends Addiction {
         shouldApplyDivineCharge = false;
     }
     
+    @Nullable
     @Override
-    public Optional<Status> startCombat(Combat c, Character opp) {
-        Optional<Status> s = super.startCombat(c, opp);
+    public Status startCombat(@Nullable Combat c, @NotNull Character opp) {
+        Status s = super.startCombat(c, opp);
         if (shouldApplyDivineCharge && opp.equals(cause)) {
             int sev = getSeverity().ordinal();
             opp.status.add(new DivineCharge(opp, sev * .75f));
@@ -169,8 +174,8 @@ public class ZealAddiction extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return "You tremble as " + cause.getName()
                             + " steps into view. Will " + cause.pronoun() + " punish you for not being pious enough?"
                             + " Perhaps you should beg forgiveness...";

@@ -36,10 +36,10 @@ public class Reyka extends BasePersonality {
     private static final String REYKA_CORRUPTION_FOCUS = "ReykaCorruptionFocus";
 
     public Reyka() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Reyka(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Reyka(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Reyka", false);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -64,11 +64,11 @@ public class Reyka extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Dark, 2);
         self.modAttributeDontSaveData(Attribute.Seduction, 3);
         self.modAttributeDontSaveData(Attribute.Cunning, 2);
-        self.setTrophy(Item.ReykaTrophy);
+        self.trophy = Item.ReykaTrophy;
 
         Global.gainSkills(self);
-        self.getStamina().setMax(50);
-        self.getArousal().setMax(120);
+        self.stamina.setMax(50);
+        self.arousal.setMax(120);
         self.getMojo().setMax(110);
 
         self.body.add(new BreastsPart(Size.DDCup));
@@ -487,8 +487,8 @@ public class Reyka extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return (!character.mostlyNude() || Global.random(3) == 1) && character.getStamina().percent() >= 50
-                        && character.getArousal().percent() <= 50;
+        return (!character.mostlyNude() || Global.random(3) == 1) && character.stamina.percent() >= 50
+                        && character.arousal.percent() <= 50;
     }
 
     @Override

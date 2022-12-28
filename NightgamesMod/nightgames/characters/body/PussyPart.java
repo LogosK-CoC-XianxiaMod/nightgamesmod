@@ -36,9 +36,9 @@ public class PussyPart extends GenericBodyPart {
             return;
         }
         b.append("A ");
-        if (c.getArousal().percent() > 15 && c.getArousal().percent() < 60) {
+        if (c.arousal.percent() > 15 && c.arousal.percent() < 60) {
             b.append("moist ");
-        } else if (c.getArousal()
+        } else if (c.arousal
                     .percent() >= 60) {
             b.append("drenched ");
         }
@@ -146,7 +146,7 @@ public class PussyPart extends GenericBodyPart {
 
     @Override
     public boolean isReady(Character c) {
-        return c.has(Trait.alwaysready) || c.getArousal().percent() >= 15;
+        return c.has(Trait.alwaysready) || c.arousal.percent() >= 15;
     }
 
     public String getFluidsNoMods(Character c) {

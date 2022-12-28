@@ -319,9 +319,9 @@ public class AngelTime extends BaseNPCTime {
                                       + " though, so you leave Angel and hurry home to fix it yourself. ");
             }
             choices.add("Leave");
-            Global.getPlayer()
-                  .addict(null, AddictionType.ZEAL, npc, Addiction.MED_INCREASE);
-            Global.getPlayer().getAddiction(AddictionType.ZEAL).ifPresent(Addiction::flagDaytime);
+            Global.getPlayer().addict(null, AddictionType.ZEAL, npc, Addiction.MED_INCREASE);
+            Addiction mc = Global.getPlayer().getAddiction(AddictionType.ZEAL);
+            if (mc != null) mc.flagDaytime();
         } else if (choice.equals("Sex")) {
             if (npc.getAffection(player) >= 12 && (!player.has(Trait.experttongue) || Global.random(2) == 1)) {
                 Global.gui()

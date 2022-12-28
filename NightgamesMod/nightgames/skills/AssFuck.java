@@ -45,7 +45,7 @@ public class AssFuck extends Fuck {
             && (getTargetOrgan(target).isReady(target)
                 || target.has(Trait.buttslut)
                 || getSelf().has(Item.Lubricant)
-                || getSelf().getArousal().percent() > 50 || getSelf().has(Trait.alwaysready)
+                || getSelf().arousal.percent() > 50 || getSelf().has(Trait.alwaysready)
                 || getSelf().has(Trait.assmaster))
             && (!target.hasPussy() || !PullOut.blockedByAddiction(getSelf()));
     }
@@ -53,7 +53,7 @@ public class AssFuck extends Fuck {
     @Override
     public boolean resolve(Combat c, Character target) {
         String premessage = premessage(c, target);
-        if (!target.hasStatus(Stsflag.oiled) && getSelf().getArousal().percent() > 50
+        if (!target.hasStatus(Stsflag.oiled) && getSelf().arousal.percent() > 50
                         || getSelf().has(Trait.alwaysready) || getSelf().has(Trait.assmaster)) {
             String fluids = target.hasDick() ? "copious pre-cum" : "own juices";
             if (premessage.isEmpty()) {
@@ -84,7 +84,7 @@ public class AssFuck extends Fuck {
         } else if (target.human()) {
             if (!c.getStance().behind(getSelf()) && getSelf().has(Trait.strapped)) {
                 c.write(getSelf(), receive(c, premessage.length(), Result.upgrade, target));
-            } else if (getSelf().getType().equals("Eve") && c.getStance().behind(getSelf())) {
+            } else if (getSelf().type.equals("Eve") && c.getStance().behind(getSelf())) {
                 arousalToSelf += 5;
                 c.write(getSelf(), receive(c, premessage.length(), Result.special, target));
             } else {
@@ -100,7 +100,7 @@ public class AssFuck extends Fuck {
 
         boolean voluntary = getSelf().canMakeOwnDecision();
         if (c.getStance().behind(getSelf())) {
-            if (getSelf().getType().equals("Eve")) {
+            if (getSelf().type.equals("Eve")) {
                 c.setStance(new AnalProne(getSelf(), target), getSelf(), voluntary);
             } else {
                 if (c.getStance().enumerate() == Stance.behindfootjob) {c.setStance(new BehindFootjob(getSelf(),target,true));}

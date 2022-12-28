@@ -29,7 +29,7 @@ public class CreationGUITest {
         creationGUI.power = 5;
         creationGUI.seduction = 11;
         creationGUI.cunning = 9;
-        creationGUI.makeGame(Optional.empty());
+        creationGUI.makeGame(null);
         assertThat(Global.human.att, allOf(hasEntry(Attribute.Power, 5), hasEntry(Attribute.Seduction, 11),
                         hasEntry(Attribute.Cunning, 9)));
         assertThat(Global.human.getTraits(), IsCollectionContaining.hasItems(Trait.romantic, Trait.insatiable));

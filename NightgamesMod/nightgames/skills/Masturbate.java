@@ -79,7 +79,7 @@ public class Masturbate extends Skill {
         targetO = getTargetOrgan(c, getSelf());
 
         if (getSelf().human()) {
-            if (getSelf().getArousal().get() <= 15) {
+            if (getSelf().arousal.get() <= 15) {
                 c.write(getSelf(), deal(c, 0, Result.weak, target));
             } else {
                 c.write(getSelf(), deal(c, 0, Result.normal, target));

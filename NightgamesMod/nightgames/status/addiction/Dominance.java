@@ -9,6 +9,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Masochistic;
 import nightgames.status.Status;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Dominance extends Addiction {
 
@@ -34,23 +36,25 @@ public class Dominance extends Addiction {
         return sev >= 5;
     }
 
+    @NotNull
     @Override
-    protected Optional<Status> withdrawalEffects() {
+    protected Status withdrawalEffects() {
             double mod = Math.min(1.0, 1.0 / (double) getSeverity().ordinal() + .4);
-            affected.getWillpower().reduceCapacity(mod);
-        return Optional.of(new Masochistic(affected));
+            affected.willpower.reduceCapacity(mod);
+        return new Masochistic(affected);
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
-        return Optional.of(this);
+    protected Status addictionEffects() {
+        return this;
     }
 
     @Override
     public void endNight() {
         super.endNight();
 
-        affected.getWillpower().resetCapacity();
+        affected.willpower.resetCapacity();
     }
 
     @Override
@@ -124,8 +128,8 @@ public class Dominance extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return cause.getName() + " is looking meaner than ever after you neglected to visit today. Equal"
                             + " parts of fear and desire well up inside of you at the thought of what "
                             + cause.pronoun() + " might do to you.";

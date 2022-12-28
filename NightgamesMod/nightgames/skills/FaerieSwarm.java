@@ -32,7 +32,7 @@ public class FaerieSwarm extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         getSelf().consume(Item.MinorScroll, 1);
-        if (target.getOutfit().isNude()) {
+        if (target.outfit.isNude()) {
             writeOutput(c, Result.normal, target);
             target.body.pleasure(getSelf(), null, null, 25 + Global.random(getSelf().get(Attribute.Arcane)), c, this);
         } else {

@@ -61,7 +61,7 @@ public class StripMinor extends Skill {
     }
 
     private List<Clothing> getStrippableArticles(Combat c) {
-        return c.getOpponentCharacter(getSelf()).getOutfit()
+        return c.getOpponentCharacter(getSelf()).outfit
                         .getAllStrippable()
                         .stream()
                         .filter(article -> canStripArticle(c, article))
@@ -83,7 +83,7 @@ public class StripMinor extends Skill {
         Clothing clothing;
         Optional<Clothing> articleToStrip;
         if (getSelf().human()) {
-            articleToStrip = target.getOutfit().getEquipped()
+            articleToStrip = target.outfit.getEquipped()
                                                    .stream()
                                                    .filter(article -> article.getName().toLowerCase().equals(getChoice().toLowerCase()))
                                                    .findAny();
@@ -98,8 +98,8 @@ public class StripMinor extends Skill {
         clothing = articleToStrip.get();
         int difficulty = clothing.dc()
                         + target.getProgression().getLevel()
-                        + (target.getStamina().percent() / 4
-                        - target.getArousal().percent()) / 5
+                        + (target.stamina.percent() / 4
+                        - target.arousal.percent()) / 5
                         - (!target.canAct() || c.getStance().sub(target) ? 20 : 0);
         difficulty -= 15;
         if (getSelf().check(Attribute.Cunning, difficulty) || !target.canAct()) {

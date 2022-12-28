@@ -44,7 +44,7 @@ public class GoodnightKiss extends Skill {
                         getSelf().pronoun(), getSelf().action("see"), getSelf().pronoun(),
                         getSelf().action("dart"), target.subject(), target.subject(), target.possessiveAdjective()));
         target.tempt(Global.random(4));
-        target.getStamina().exhaust(target.getStamina().max());
+        target.stamina.exhaust(target.stamina.max());
         return true;
     }
 

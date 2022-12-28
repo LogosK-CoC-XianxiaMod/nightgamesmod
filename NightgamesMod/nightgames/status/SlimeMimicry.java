@@ -21,7 +21,7 @@ public class SlimeMimicry extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return Global.format("{self:SUBJECT} started mimicking a %s.", affected, c.getOpponentCharacter(affected), mimickedName);
     }
 

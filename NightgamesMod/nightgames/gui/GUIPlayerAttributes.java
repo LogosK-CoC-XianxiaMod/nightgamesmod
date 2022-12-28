@@ -135,7 +135,7 @@ class GUIPlayerAttributes {
 
             editorKit.insertHTML(doc, doc.getLength(),
                 "<font face='Georgia' color='white' size='" + descFontSize + "'>"
-                    + player.getOutfit().describe(player) + "<br/>" + player.describeStatus()
+                    + player.outfit.describe(player) + "<br/>" + player.describeStatus()
                     + "</font><br/>",
                 0, 0, null);
         } catch (BadLocationException | IOException e) {

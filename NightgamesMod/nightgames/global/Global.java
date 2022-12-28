@@ -173,13 +173,13 @@ public class Global {
      * A list of traits that the player has picked at chargen.
      * 
      * */
-    public static void newGame(String playerName, Optional<StartConfiguration> config, List<Trait> pickedTraits,
+    public static void newGame(String playerName, StartConfiguration config, List<Trait> pickedTraits,
                     CharacterSex pickedGender, Map<Attribute, Integer> selectedAttributes) {
-        Optional<PlayerConfiguration> playerConfig = config.map(c -> c.player);
-        Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
+        PlayerConfiguration playerConfig = config != null ? config.player : null;
+        Collection<String> cfgFlags = config != null ? config.getFlags() : new ArrayList<>();
         human = new Player(playerName, gui, pickedGender, playerConfig, pickedTraits, selectedAttributes);
         if(human.has(Trait.largereserves)) {
-            human.getWillpower().gain(20);
+            human.willpower.gain(20);
         }
         players.add(human);
         if (gui != null) {
@@ -195,7 +195,7 @@ public class Global {
             flags = new HashSet<>(cfgFlags);
             System.out.println("flags: "+flags.toString());
         }      
-        Map<String, Boolean> configurationFlags = JsonUtils.mapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
+        Map<String, Boolean> configurationFlags = JsonUtils.oldMapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
         configurationFlags.forEach(Global::setFlag);
 
         time = Time.NIGHT;
@@ -608,8 +608,8 @@ public class Global {
         int maxLevelTracker = 0;
         
         for (Character player : players) {
-            player.getStamina().renew();
-            player.getArousal().renew();
+            player.stamina.renew();
+            player.arousal.renew();
             player.getMojo().renew();
             player.change();
             level += player.getProgression().getLevel();
@@ -710,10 +710,10 @@ public class Global {
         Character lover = null;
         int maxaffection = 0;
         for (Character player : players) {
-            player.getStamina().renew();
-            player.getArousal().renew();
+            player.stamina.renew();
+            player.arousal.renew();
             player.getMojo().renew();
-            player.getWillpower().renew();
+            player.willpower.renew();
             if (player.getPure(Attribute.Science) > 0) {
                 player.chargeBattery();
             }
@@ -726,7 +726,7 @@ public class Global {
         // Disable characters flagged as disabled
         for (Character c : players) {
             // Disabling the player wouldn't make much sense, and there's no PlayerDisabled flag.
-            if (c.getType().equals("Player") || !checkCharacterDisabledFlag(c)) {
+            if (c.type.equals("Player") || !checkCharacterDisabledFlag(c)) {
                 result.participants.add(c);
             }
         }
@@ -945,8 +945,8 @@ public class Global {
         }
     }
 
-    private static Optional<NpcConfiguration> findNpcConfig(String type, Optional<StartConfiguration> startConfig) {
-        return startConfig.isPresent() ? startConfig.get().findNpcConfig(type) : Optional.empty();
+    private static NpcConfiguration findNpcConfig(String type, StartConfiguration startConfig) {
+        return startConfig!= null ? startConfig.findNpcConfig(type) : null;
     }
 
     /**Rebuilds the character pool using the starting configuration. 
@@ -956,12 +956,12 @@ public class Global {
      * 
      * 
      * */
-    public static void rebuildCharacterPool(Optional<StartConfiguration> startConfig) {
+    public static void rebuildCharacterPool(StartConfiguration startConfig) {
         characterPool = new HashMap<>();
         debugChars.clear();
 
-        Optional<NpcConfiguration> commonConfig =
-                        startConfig.isPresent() ? Optional.of(startConfig.get().npcCommon) : Optional.empty();
+        NpcConfiguration commonConfig =
+                        startConfig != null ? startConfig.npcCommon : null;
 
         try (InputStreamReader reader = new InputStreamReader(
                         ResourceLoader.getFileResourceAsStream("characters/included.json"))) {
@@ -971,9 +971,9 @@ public class Global {
                 try {
                     DataBackedNPCData data = JsonSourceNPCDataLoader
                                     .load(ResourceLoader.getFileResourceAsStream("characters/" + name));
-                    Optional<NpcConfiguration> npcConfig = findNpcConfig(CustomNPC.TYPE_PREFIX + data.getName(), startConfig);
+                    NpcConfiguration npcConfig = findNpcConfig(CustomNPC.TYPE_PREFIX + data.getName(), startConfig);
                     BasePersonality npc = new CustomNPC(data, npcConfig, commonConfig);
-                    characterPool.put(npc.getCharacter().getType(), npc.getCharacter());
+                    characterPool.put(npc.character.getType(), npc.character);
                     System.out.println("Loaded " + name);
                 } catch (JsonParseException e1) {
                     System.err.println("Failed to load NPC " + name);
@@ -996,16 +996,16 @@ public class Global {
         BasePersonality eve = new Eve(findNpcConfig("Eve", startConfig), commonConfig);
         BasePersonality maya = new Maya(1, findNpcConfig("Maya", startConfig), commonConfig);
         BasePersonality yui = new Yui(findNpcConfig("Yui", startConfig), commonConfig);
-        characterPool.put(cassie.getCharacter().getType(), cassie.getCharacter());
-        characterPool.put(angel.getCharacter().getType(), angel.getCharacter());
-        characterPool.put(reyka.getCharacter().getType(), reyka.getCharacter());
-        characterPool.put(kat.getCharacter().getType(), kat.getCharacter());
-        characterPool.put(mara.getCharacter().getType(), mara.getCharacter());
-        characterPool.put(jewel.getCharacter().getType(), jewel.getCharacter());
-        characterPool.put(airi.getCharacter().getType(), airi.getCharacter());
-        characterPool.put(eve.getCharacter().getType(), eve.getCharacter());
-        characterPool.put(maya.getCharacter().getType(), maya.getCharacter());
-        characterPool.put(yui.getCharacter().getType(), yui.getCharacter());
+        characterPool.put(cassie.character.getType(), cassie.character);
+        characterPool.put(angel.character.getType(), angel.character);
+        characterPool.put(reyka.character.getType(), reyka.character);
+        characterPool.put(kat.character.getType(), kat.character);
+        characterPool.put(mara.character.getType(), mara.character);
+        characterPool.put(jewel.character.getType(), jewel.character);
+        characterPool.put(airi.character.getType(), airi.character);
+        characterPool.put(eve.character.getType(), eve.character);
+        characterPool.put(maya.character.getType(), maya.character);
+        characterPool.put(yui.character.getType(), yui.character);
     }
     
     public static void loadWithDialog() {
@@ -1039,7 +1039,7 @@ public class Global {
         gui.purgePlayer();
         buildSkillPool(human);
         Clothing.buildClothingTable();
-        rebuildCharacterPool(Optional.empty());
+        rebuildCharacterPool(null);
         day = null;
     }
 
@@ -1073,7 +1073,7 @@ public class Global {
     protected static void loadData(SaveData data) {
         players.addAll(data.players);
         players.stream().filter(c -> c instanceof NPC).forEach(
-                        c -> characterPool.put(c.getType(), (NPC) c));
+                        c -> characterPool.put(c.type, (NPC) c));
         flags.addAll(data.flags);
         counters.putAll(data.counters);
         date = data.date;
@@ -1086,12 +1086,12 @@ public class Global {
     }
 
     public static boolean newChallenger(BasePersonality challenger) {
-        if (!players.contains(challenger.getCharacter())) {
+        if (!players.contains(challenger.character)) {
             int targetLevel = human.getProgression().getLevel();
-            while (challenger.getCharacter().getProgression().getLevel() <= targetLevel) {
-                challenger.getCharacter().ding(null);
+            while (challenger.character.getProgression().getLevel() <= targetLevel) {
+                challenger.character.ding(null);
             }
-            players.add(challenger.getCharacter());
+            players.add(challenger.character);
             return true;
         } else {
             return false;
@@ -1100,7 +1100,7 @@ public class Global {
 
     public static NPC getNPC(String name) {
         for (Character c : allNPCs()) {
-            if (c.getType().equalsIgnoreCase(name)) {
+            if (c.type.equalsIgnoreCase(name)) {
                 return (NPC) c;
             }
         }
@@ -1179,7 +1179,7 @@ public class Global {
     }
 
     public static boolean characterTypeInGame(String type) {
-        return players.stream().anyMatch(c -> type.equals(c.getType()));
+        return players.stream().anyMatch(c -> type.equals(c.type));
     }
 
     public static float randomfloat() {

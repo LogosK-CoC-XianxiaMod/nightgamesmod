@@ -29,7 +29,7 @@ public class PartiallyCorrupted extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         if (counter > THRESHOLD) {
             affected.addict(c, AddictionType.CORRUPTION,
                             cause, cause.has(Trait.Subversion) ? Addiction.HIGH_INCREASE : Addiction.MED_INCREASE);

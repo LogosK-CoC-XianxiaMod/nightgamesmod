@@ -114,7 +114,7 @@ public class Cunnilingus extends Skill {
         if (modifier == Result.miss) {
             return "You try to eat out " + target.getName() + ", but she pushes your head away.";
         }
-        if (target.getArousal().get() < 10) {
+        if (target.arousal.get() < 10) {
             return "You run your tongue over " + target.getName() + "'s dry vulva, lubricating it with your saliva.";
         }
         if (modifier == Result.special) {
@@ -136,7 +136,7 @@ public class Cunnilingus extends Skill {
                             + (damage == -2 ? " You feel a strange pull on you mind,"
                                             + " somehow she has managed to enthrall you with her juices." : "");
         }
-        if (target.getArousal().percent() > 80) {
+        if (target.arousal.percent() > 80) {
             return "You relentlessly lick and suck the lips of " + target.getName()
                             + "'s pussy as she squirms in pleasure. You let up just for a second before kissing her"
                             + " swollen clit, eliciting a cute gasp."

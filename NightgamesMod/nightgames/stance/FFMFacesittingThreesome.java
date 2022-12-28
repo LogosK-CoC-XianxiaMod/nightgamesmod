@@ -50,7 +50,7 @@ public class FFMFacesittingThreesome extends FFMCowgirlThreesome {
     
     @Override
     public void checkOngoing(Combat c) {
-        if (!c.getOtherCombatants().contains(domSexCharacter)) {
+        if (!c.getPetCombatants().contains(domSexCharacter)) {
             c.write(bottom, Global.format("With the disappearance of {self:name-do}, {other:subject-action:manage|manages} to escape.", domSexCharacter, bottom));
             c.setStance(new Neutral(top, bottom));
         }

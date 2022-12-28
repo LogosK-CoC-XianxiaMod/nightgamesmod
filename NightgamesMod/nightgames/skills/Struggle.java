@@ -145,7 +145,7 @@ public class Struggle extends Skill {
         if (getSelf().has(Trait.nymphomania)) {
             diffMod+=getSelf().get(Attribute.Nymphomania)/4;
         }
-        if (getSelf().check(Attribute.Power,target.getStamina().get() / 2 - getSelf().getStamina().get() / 2+ target.get(Attribute.Power) - getSelf().get(Attribute.Power)
+        if (getSelf().check(Attribute.Power, target.stamina.get() / 2 - getSelf().stamina.get() / 2+ target.get(Attribute.Power) - getSelf().get(Attribute.Power)
                         - getSelf().getEscape(c, target) + diffMod)) {
 
             if (c.getStance().reversable(c)) {
@@ -216,7 +216,7 @@ public class Struggle extends Skill {
         }
 
         if (getSelf().check(Attribute.Power,
-                        target.getStamina().get() / 2 - getSelf().getStamina().get() / 2
+                        target.stamina.get() / 2 - getSelf().stamina.get() / 2
                                         + target.get(Attribute.Power) - getSelf().get(Attribute.Power)
                                         - getSelf().getEscape(c, target) + diffMod)) {
             if (getSelf().hasStatus(Stsflag.cockbound)) {
@@ -268,7 +268,7 @@ public class Struggle extends Skill {
         if (getSelf().has(Trait.nymphomania)) {diffMod+=getSelf().get(Attribute.Nymphomania)/4;}
 	if (target.has(Trait.powerfulcheeks)) {diffMod += 5;}
         if (target.has(Trait.bewitchingbottom)) {diffMod += 5;}
-        if ((getSelf().check(Attribute.Power, target.getStamina().get() / 2 - getSelf().getStamina().get() / 2
+        if ((getSelf().check(Attribute.Power, target.stamina.get() / 2 - getSelf().stamina.get() / 2
                         + target.get(Attribute.Power) - diffMod - getSelf().get(Attribute.Power) - getSelf().getEscape(c, target)))
                         && (!target.has(Trait.grappler) || Global.random(10) >= 2)) {
             if (getSelf().human()) {

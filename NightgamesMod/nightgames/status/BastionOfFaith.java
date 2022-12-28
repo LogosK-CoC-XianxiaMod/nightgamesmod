@@ -24,7 +24,7 @@ public class BastionOfFaith extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s divine protection.\n", affected.subjectAction("have", "has"));
     }
 

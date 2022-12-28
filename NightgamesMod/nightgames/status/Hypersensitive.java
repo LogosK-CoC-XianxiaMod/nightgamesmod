@@ -5,6 +5,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -29,9 +30,10 @@ public class Hypersensitive extends DurationStatus {
         }
     }
 
+    @Nullable
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (replacement.isEmpty()) {
+    public String initialMessage(@Nullable Combat c, Status replacement) {
+        if (replacement != null) {
             return String.format("%s now hypersensitive.\n", affected.subjectAction("are", "is"));
         } else {
             return "";

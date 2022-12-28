@@ -8,7 +8,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.json.JsonUtils;
+import nightgames.requirements.Requirement;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class PartSucked extends Status implements InsertedStatus {
@@ -21,7 +23,7 @@ public class PartSucked extends Status implements InsertedStatus {
         target = targetType;
         this.penetrated = penetrated;
         this.other = other;
-        requirements.add((c, self, opponent) -> {
+        ((ArrayList<Requirement>)requirements).add((c, self, opponent) -> {
             if (c.getStance().distance() > 1) {
                 return false;
             }
@@ -31,7 +33,7 @@ public class PartSucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         BodyPart stick = affected.body.getRandom(target);
         if (stick == null || penetrated == null) {
             return "";

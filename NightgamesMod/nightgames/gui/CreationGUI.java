@@ -88,7 +88,7 @@ public class CreationGUI extends JPanel {
         lblName.setFont(new Font("Sylfaen", Font.BOLD, 15));
         topPanel.add(lblName);
 
-        namefield = new JTextField();
+        namefield = new JTextField("Alexis");
         namefield.setFont(new Font("Sylfaen", Font.BOLD, 15));
         topPanel.add(namefield);
         namefield.setColumns(10);
@@ -111,7 +111,7 @@ public class CreationGUI extends JPanel {
         btnAdvStart.setFont(new Font("Verdana", Font.BOLD, 12));
         topPanel.add(btnAdvStart);
         btnAdvStart.addActionListener((evt) -> advancedStart());
-
+//advancedStart();
         scrollPane = new JScrollPane();
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
@@ -461,7 +461,7 @@ public class CreationGUI extends JPanel {
         StartConfiguration firstCfg;
         Optional<StartConfiguration> def = starts.stream()
                                                  .filter(s -> s.getName()
-                                                               .equals("Default"))
+                                                               .equals("Futanari Time"))
                                                  .findAny();
         if (def.isPresent()) {
             firstCfg = def.get();
@@ -479,26 +479,24 @@ public class CreationGUI extends JPanel {
         configs.addItemListener(e -> setupConfig((StartConfiguration) e.getItem()));
         Arrays.stream(btnStart.getActionListeners())
               .forEach(btnStart::removeActionListener);
-        btnStart.addActionListener(e -> makeGame(Optional.of((StartConfiguration) configs.getSelectedItem())));
+        btnStart.addActionListener(e -> makeGame((StartConfiguration) configs.getSelectedItem()));
     }
 
     private void makeGame() {
-        makeGame(Optional.empty());
+        makeGame(null);
     }
 
-    private boolean playerCanChooseTraits(Optional<StartConfiguration> startConfig) {
+    private boolean playerCanChooseTraits(StartConfiguration startConfig) {
         boolean allowed = true;
-        if (startConfig.isPresent()) {
-            allowed = startConfig.get().playerCanChooseTraits();
+        if (startConfig != null) {
+            allowed = startConfig.playerCanChooseTraits();
         }
         return allowed;
     }
 
 
-    protected void makeGame(Optional<StartConfiguration> startConfig) {
-        if (!namefield.getText().isEmpty() || (startConfig.isPresent() 
-                        && startConfig.get().player.nameIsSet())) {
-
+    protected void makeGame(StartConfiguration startConfig) {
+        if (!namefield.getText().isEmpty() || (startConfig != null && startConfig.player.nameIsSet())) {
             String name = namefield.getText();
             CharacterSex sex = (CharacterSex) sexBox.getSelectedItem();
             List<Trait> traits = Collections.emptyList();
@@ -516,7 +514,7 @@ public class CreationGUI extends JPanel {
             selectedAttributes.put(Attribute.Seduction, seduction);
             selectedAttributes.put(Attribute.Cunning, cunning);
             Global.newGame(name, startConfig, traits, sex, selectedAttributes);
-            if(startConfig.isPresent() && Global.getFlagStartingWith(startConfig.get().getFlags(), "SkipTutorial").isPresent() && STARTER instanceof TutorialStart) {
+            if(startConfig != null && Global.getFlagStartingWith(startConfig.getFlags(), "SkipTutorial") != null && STARTER instanceof TutorialStart) {
                 ((TutorialStart)STARTER).respond("Start");return;
             }
             STARTER.startGame(MatchType.NORMAL);

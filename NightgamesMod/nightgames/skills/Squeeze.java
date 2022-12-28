@@ -123,13 +123,13 @@ public class Squeeze extends Skill {
                             + "'s testicles.";
         } else if (modifier == Result.weak) {
             return "You grab the bulge in " + target.getName() + "'s "
-                            + target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName() + " and squeeze.";
+                            + target.outfit.getTopOfSlot(ClothingSlot.bottom).getName() + " and squeeze.";
         } else if (modifier == Result.weak2) {
             return "You grab " + target.getName() + "by the balls and squeeze hard, but" + target.pronoun()
                             + " does not flinch at all.";
         } else if (modifier == Result.item) {
             return "You grab the bulge in " + target.getName() + "'s "
-                            + target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                            + target.outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                             + ", but find it solidly protected.";
         } else {
             return "You manage to grab " + target.getName()
@@ -152,7 +152,7 @@ public class Squeeze extends Skill {
             return String.format("%s grabs %s balls through %s %s and squeezes hard.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             target.possessiveAdjective(), 
-                            target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName());
+                            target.outfit.getTopOfSlot(ClothingSlot.bottom).getName());
         } else if (modifier == Result.weak2) {
             return String.format("%s grins menacingly and firmly grabs %s nuts. %s squeezes as hard as "
                             + "%s can, but %s hardly %s it.", getSelf().subject(),
@@ -162,7 +162,7 @@ public class Squeeze extends Skill {
         } else if (modifier == Result.item) {
             return String.format("%s grabs %s crotch through %s %s, but %s can barely feel it.",
                             getSelf().subject(), target.nameOrPossessivePronoun(), target.possessiveAdjective(),
-                            target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName(),
+                            target.outfit.getTopOfSlot(ClothingSlot.bottom).getName(),
                             target.pronoun());
         } else {
             return String.format("%s reaches between %s legs and grabs %s exposed balls. %s "

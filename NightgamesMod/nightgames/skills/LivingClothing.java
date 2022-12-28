@@ -39,8 +39,8 @@ public class LivingClothing extends Skill {
         } else {
             c.write(getSelf(), receive(c, 0, Result.normal, target));
         }
-        getSelf().getOutfit().equip(Clothing.getByID("tentacletop"));
-        getSelf().getOutfit().equip(Clothing.getByID("tentaclebottom"));
+        getSelf().outfit.equip(Clothing.getByID("tentacletop"));
+        getSelf().outfit.equip(Clothing.getByID("tentaclebottom"));
         return true;
     }
 

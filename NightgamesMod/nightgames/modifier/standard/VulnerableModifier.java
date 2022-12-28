@@ -4,6 +4,7 @@ import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.modifier.BaseModifier;
 import nightgames.modifier.status.StatusModifier;
+import nightgames.status.DurationStatus;
 import nightgames.status.Hypersensitive;
 
 public class VulnerableModifier extends BaseModifier {
@@ -11,7 +12,7 @@ public class VulnerableModifier extends BaseModifier {
     public static final String NAME = "vulnerable";
 
     public VulnerableModifier() {
-        status = new StatusModifier(new Hypersensitive(null), true);
+        status = new StatusModifier(new Hypersensitive(DurationStatus.dummyNPCForInit), true);
     }
 
     @Override

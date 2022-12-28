@@ -222,9 +222,8 @@ public class JewelTime extends BaseNPCTime {
                                   + " of some of Jewel's neighbors. You hurriedly pull the shirt on and make your way out of the dorm.");
             Global.getPlayer()
                   .addict(null, AddictionType.DOMINANCE, npc, Addiction.MED_INCREASE);
-            Global.getPlayer()
-                  .getAddiction(AddictionType.DOMINANCE)
-                  .ifPresent(Addiction::flagDaytime);
+            Addiction mc = Global.getPlayer().getAddiction(AddictionType.DOMINANCE);
+            if (mc != null) mc.flagDaytime();
             choices.add("Leave");
         }
         if (choice.equals("Sex")) {

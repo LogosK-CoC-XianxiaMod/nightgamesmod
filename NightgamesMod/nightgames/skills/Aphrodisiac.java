@@ -37,7 +37,7 @@ public class Aphrodisiac extends Skill {
         boolean hasItem = getSelf().has(Item.Aphrodisiac);
         boolean canGetFromOwnBody =
             !(getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty())
-                        && getSelf().getArousal().get() >= 10
+                        && getSelf().arousal.get() >= 10
                         && !c.getStance().prone(getSelf());
         return canMove && (hasItem || canGetFromOwnBody);
     }
@@ -56,7 +56,7 @@ public class Aphrodisiac extends Skill {
             writeOutput(c, Result.miss, target);
             return false;
         } else if (!getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty()
-            && getSelf().getArousal().percent() >= 15) {
+            && getSelf().arousal.percent() >= 15) {
             result = Result.strong;
             type = "aphrodisiac juices";
         } else {
@@ -110,7 +110,7 @@ public class Aphrodisiac extends Skill {
                 + " a finger "
                 + (getSelf().crotchAvailable() ? "" : "under "
                 + getSelf().possessiveAdjective()
-                + " " + getSelf().getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                + " " + getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                 + " and ")
                 + "into " + getSelf().possessiveAdjective() + " pussy. Once "
                 + getSelf().subjectAction("have", "has")
@@ -162,7 +162,7 @@ public class Aphrodisiac extends Skill {
                 + " a finger "
                 + (getSelf().crotchAvailable() ? "" : "under "
                 + getSelf().possessiveAdjective()
-                + " " + getSelf().getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                + " " + getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                 + " and ")
                 + "into " + getSelf().possessiveAdjective() + " pussy. Once "
                 + getSelf().subjectAction("have", "has") + " collected a drop of "

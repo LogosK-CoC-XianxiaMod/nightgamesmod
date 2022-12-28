@@ -32,6 +32,7 @@ import nightgames.status.Disguised;
 import nightgames.status.Pheromones;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -91,7 +92,7 @@ public class NPC extends Character {
         }
         b.append(outfit.describe(this));
         b.append(observe(per));
-        b.append(getArmManager().map(m -> m.describe(this)).orElse(""));
+        if (getArmManager() != null) b.append(getArmManager().describe(this));
         return b.toString();
     }
 
@@ -319,7 +320,7 @@ public class NPC extends Character {
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     } else {
                         c.write(this, getName() + " catches you as you approach and grinds her knee into the tent in your "
-                                        + target.getOutfit().getTopOfSlot(ClothingSlot.bottom) +".");
+                                        + target.outfit.getTopOfSlot(ClothingSlot.bottom) +".");
                         target.body.pleasure(this, body.getRandom("legs"), target.body.getRandomCock(),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     }
@@ -432,7 +433,7 @@ public class NPC extends Character {
     public void endOfCombatRound(Combat c, Character opponent) {
         super.endOfCombatRound(c, opponent);
         ai.eot(c, opponent);
-        if (opponent.has(Trait.pheromones) && opponent.getArousal().percent() >= 20 && opponent.rollPheromones(c)) {
+        if (opponent.has(Trait.pheromones) && opponent.arousal.percent() >= 20 && opponent.rollPheromones(c)) {
             c.write(opponent, Global.format("<br/>{other:SUBJECT-ACTION:see} {self:subject} swoon slightly "
                             + "as {self:pronoun-action:get} close to {other:direct-object}. "
                             + "Seems like {self:pronoun-action:are} starting to feel "
@@ -441,8 +442,8 @@ public class NPC extends Character {
         }
         if (has(Trait.RawSexuality)) {
             c.write(this, Global.format("{self:NAME-POSSESSIVE} raw sexuality turns both of you on.", this, opponent));
-            temptNoSkillNoSource(c, opponent, getArousal().max() / 20);
-            opponent.temptNoSkillNoSource(c, this, opponent.getArousal().max() / 20);
+            temptNoSkillNoSource(c, opponent, arousal.max() / 20);
+            opponent.temptNoSkillNoSource(c, this, opponent.arousal.max() / 20);
         }
         if (c.getStance().dom(this)) {
             emote(Emotion.dominant, 20);
@@ -461,22 +462,22 @@ public class NPC extends Character {
                 emote(Emotion.horny, 20);
             }
         }
-        if (opponent.getArousal().percent() >= 75) {
+        if (opponent.arousal.percent() >= 75) {
             emote(Emotion.confident, 20);
         }
 
-        if (getArousal().percent() >= 50) {
-            emote(Emotion.horny, getArousal().percent() / 4);
+        if (arousal.percent() >= 50) {
+            emote(Emotion.horny, arousal.percent() / 4);
         }
 
-        if (getArousal().percent() >= 50) {
+        if (arousal.percent() >= 50) {
             emote(Emotion.desperate, 10);
         }
-        if (getArousal().percent() >= 75) {
+        if (arousal.percent() >= 75) {
             emote(Emotion.desperate, 20);
             emote(Emotion.nervous, 10);
         }
-        if (getArousal().percent() >= 90) {
+        if (arousal.percent() >= 90) {
             emote(Emotion.desperate, 20);
         }
         if (!canAct()) {
@@ -583,18 +584,20 @@ public class NPC extends Character {
     @Override
     public void matchPrep(Match m) {
         super.matchPrep(m);
-        ai.getArmManager().ifPresent(manager -> {
+        ArmManager manager = ai.getArmManager();
+        if (manager != null) {
             ai.initializeArms(manager);
             if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
                 add(Trait.stabilized);
             } else {
                 remove(Trait.stabilized);
             }
-        });
+        };
     }
 
+    @Nullable
     @Override
-    public Optional<ArmManager> getArmManager() {
+    public ArmManager getArmManager() {
         return ai.getArmManager();
     }
 

@@ -58,7 +58,7 @@ public class Frenzied extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         if (affected.has(Trait.Rut) && !affected.human()) {
             return Global.format("There's a frenzied look in {self:name-possessive} eyes as they zero in on {other:name-possessive} crotch. "
                             + "This could be bad.", affected, c.getOpponentCharacter(affected));

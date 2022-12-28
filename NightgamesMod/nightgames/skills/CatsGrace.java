@@ -22,7 +22,7 @@ public class CatsGrace extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return !getSelf().is(Stsflag.nimble) && c.getStance().en == Stance.neutral && getSelf().canAct() && c.getStance().mobile(getSelf())
-                        && getSelf().getArousal().percent() >= 20;
+                        && getSelf().arousal.percent() >= 20;
     }
 
     @Override

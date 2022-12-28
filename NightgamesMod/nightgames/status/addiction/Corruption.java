@@ -13,6 +13,8 @@ import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -181,14 +183,16 @@ public class Corruption extends Addiction {
         return Optional.empty();
     }
 
+    @NotNull
     @Override
-    protected Optional<Status> withdrawalEffects() {
-       return Optional.of(new DarkChaos(affected));
+    protected Status withdrawalEffects() {
+       return new DarkChaos(affected);
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
-        return Optional.of(this);
+    protected Status addictionEffects() {
+        return this;
     }
 
     @Override
@@ -293,8 +297,8 @@ public class Corruption extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return "The blackness resonates with " + cause.getName() + ", growing even more powerful and troublesome than before.";
         }
         return "The blackness " + cause.getName() + " places in you resonates with " + cause.objectPronoun() + ". You can"

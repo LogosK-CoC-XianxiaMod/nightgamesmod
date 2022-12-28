@@ -29,8 +29,8 @@ public class NPCPetCharacter extends PetCharacter {
         this.getSkills().clear();
         this.body = prototypeCharacter.body.clone(this);
         this.outfit = new Outfit(prototypeCharacter.outfit);
-        getStamina().renew();
-        getArousal().renew();
+        stamina.renew();
+        arousal.renew();
         getMojo().renew();
         this.lines = Collections.unmodifiableMap(prototype.getLines());
         Global.learnSkills(this);

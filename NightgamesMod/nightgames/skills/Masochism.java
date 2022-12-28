@@ -20,7 +20,7 @@ public class Masochism extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canAct() && c.getStance().mobile(getSelf()) && getSelf().getArousal().get() >= 15
+        return getSelf().canAct() && c.getStance().mobile(getSelf()) && getSelf().arousal.get() >= 15
                         && !getSelf().is(Stsflag.masochism);
     }
 

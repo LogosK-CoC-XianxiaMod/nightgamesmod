@@ -35,7 +35,7 @@ public class DebugGUIPanel extends JPanel {
         //TODO: What is the correct usage of this with a modifier?
         consoleCommands.add(new DebugCommand("all\\.(.*)", (output, list) -> {
             Global.getParticipants().stream().forEach(participant -> {
-                consoleCommands.stream().filter(cc -> cc.checkAndExecute(output, participant.getType() + "." + list.get(1))).findFirst();
+                consoleCommands.stream().filter(cc -> cc.checkAndExecute(output, participant.type + "." + list.get(1))).findFirst();
             });
         }));
         consoleCommands.add(new DebugCommand("(\\w+)\\.setMoney (\\d+)", (output, list) -> {
@@ -162,8 +162,8 @@ public class DebugGUIPanel extends JPanel {
                 }
                 String attString = Arrays.stream(Attribute.values()).filter(att -> target.get(att) != 0).map(att -> String.format("%s: %d", att, target.get(att))).collect(Collectors.joining("\n"));
                 output.setText(String.format("Stamina [%s]\nArousal [%s]\nMojo [%s]\nWillpower [%s]\nAttractiveness: %.01f\n%s\n%s",
-                                target.getStamina().toString(), target.getArousal().toString(),
-                                target.getMojo().toString(), target.getWillpower().toString(), target.body.getHotness(Global.getPlayer()), attString, sb.toString()));
+                                target.stamina.toString(), target.arousal.toString(),
+                                target.getMojo().toString(), target.willpower.toString(), target.body.getHotness(Global.getPlayer()), attString, sb.toString()));
             } catch (NullPointerException e) {
                 output.setText(list.get(1) + " is not a valid character");
             }

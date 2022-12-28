@@ -26,7 +26,7 @@ public class Handjob extends Skill {
     public boolean usable(Combat c, Character target) {
         return c.getStance().reachBottom(getSelf())
                         && (target.crotchAvailable() || getSelf().has(Trait.dexterous)
-                                        && target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getLayer() <= 1)
+                                        && target.outfit.getTopOfSlot(ClothingSlot.bottom).getLayer() <= 1)
                         && target.hasDick() && getSelf().canAct()
                         && (!c.getStance().inserted(target));
     }
@@ -97,14 +97,14 @@ public class Handjob extends Skill {
             return String.format("%s slips %s hand into %s %s and strokes %s dick.",
                             getSelf().subject(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(),
-                            target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName(),
+                            target.outfit.getTopOfSlot(ClothingSlot.bottom).getName(),
                             target.possessiveAdjective());
         } else if (modifier == Result.weak) {
             return String.format("%s clumsily fondles %s crotch. It's not skillful by"
                             + " any means, but it's also not entirely ineffective.",
                             getSelf().subject(), target.nameOrPossessivePronoun());
         } else {
-            if (target.getArousal().get() < 15) {
+            if (target.arousal.get() < 15) {
                 return String.format("%s grabs %s soft penis and plays with the sensitive organ "
                                 + "until it springs into readiness.",
                                 getSelf().subject(), target.nameOrPossessivePronoun());

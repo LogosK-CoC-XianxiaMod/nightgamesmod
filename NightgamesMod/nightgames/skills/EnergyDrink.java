@@ -40,7 +40,7 @@ public class EnergyDrink extends Skill {
         } else if (c.isBeingObserved()) {
             c.write(getSelf(), receive(c, 0, Result.normal, target));
         }
-        getSelf().heal(c, Math.max(20, getSelf().getStamina().max() / 2));
+        getSelf().heal(c, Math.max(20, getSelf().stamina.max() / 2));
         getSelf().buildMojo(c, 20 + Global.random(10));
 
         getSelf().consume(Item.EnergyDrink, 1);

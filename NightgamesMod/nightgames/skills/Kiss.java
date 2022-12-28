@@ -95,7 +95,7 @@ public class Kiss extends Skill {
         }
         writeOutput(c, res, target);
         if (res == Result.upgrade) {
-            target.drain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.drain, target, target.getStamina().max() / 8));
+            target.drain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.drain, target, target.stamina.max() / 8));
             target.drainWillpowerAsMojo(c, getSelf(), (int) getSelf().modifyDamage(DamageType.drain, target, 2), 2);
         }
         if (res == Result.divine) {

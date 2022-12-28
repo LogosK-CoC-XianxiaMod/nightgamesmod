@@ -16,6 +16,8 @@ import nightgames.stance.Position;
 import nightgames.status.Enthralled;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MindControl extends Addiction {
 
@@ -27,14 +29,16 @@ public class MindControl extends Addiction {
         this(affected, cause, .01f);
     }
 
+    @NotNull
     @Override
-    protected Optional<Status> withdrawalEffects() {
-        return Optional.of(new MindControlWithdrawal(affected));
+    protected Status withdrawalEffects() {
+        return new MindControlWithdrawal(affected);
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
-        return Optional.of(this);
+    protected Status addictionEffects() {
+        return this;
     }
 
     @Override
@@ -131,8 +135,8 @@ public class MindControl extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return "There " + cause.pronoun() + " is! " + cause.getName() + " does not look pleased after you haven't visited "
                     + cause.objectPronoun() + " all day.";
         }
@@ -387,7 +391,7 @@ public class MindControl extends Addiction {
 
         @Override
         public void tick(Combat c) {
-            if (affected.getStamina()
+            if (affected.stamina
                         .percent() > 5) {
                 int amt = getSeverity().ordinal() * (Global.random(6) + 1);
                 affected.weaken(c, (int) cause.modifyDamage(DamageType.temptation, affected, amt));
@@ -396,7 +400,7 @@ public class MindControl extends Addiction {
         }
 
         @Override
-        public String initialMessage(Combat c, Optional<Status> replacement) {
+        public String initialMessage(Combat c, Status replacement) {
             return ""; // handled by withdrawal message
         }
 

@@ -79,9 +79,9 @@ public class FootSmother extends Skill {
                         + " {self:body-part:feet}, ";
         String parts = "";
         if (target.hasDick()) {
-            if (target.getArousal().percent() < 30) {
+            if (target.arousal.percent() < 30) {
                 parts += "{other:possessive} {other:body-part:cock} starts to twitch";
-            } else if (target.getArousal().percent() < 60) {
+            } else if (target.arousal.percent() < 60) {
                 parts += "{other:possessive} {other:body-part:cock} starts to throb";
             } else {
                 parts += "{other:possessive} {other:body-part:cock} start to leak " + target.body.getRandomCock().getFluids(target);
@@ -91,9 +91,9 @@ public class FootSmother extends Skill {
             if (parts.length() > 0) {
                 parts += " and ";
             }
-            if (target.getArousal().percent() < 30) {
+            if (target.arousal.percent() < 30) {
                 parts += "{other:pronoun-action:feel|feels} {other:reflective} start to get wet";
-            } else if (target.getArousal().percent() < 60) {
+            } else if (target.arousal.percent() < 60) {
                 parts += "{other:pronoun-action:feel|feels} {other:possessive}"
                                 + " wetness start to run down {other:possessive} leg";
             } else {

@@ -37,14 +37,14 @@ public class Apostles {
         if (character.canRespond()
             && combat.getCombatantData(character).getIntegerFlag(APOSTLES_COUNT_FLAG) >= 4) {
             List<BasePersonality> possibleApostles = Stream.of(new Mei(), new Caroline(), new Sarah())
-                .filter(possible -> combat.getOtherCombatants().stream()
+                .filter(possible -> combat.getPetCombatants().stream()
                         .noneMatch(existing -> existing.getName().equals(possible.character.getName())))
                 .collect(Collectors.toList());
             var targetApostle = Global.pickRandom(possibleApostles);
             if (targetApostle.isPresent()) {
                 var quote = Global.pickRandom(SUMMON_APOSTLE_QUOTE);
                 CharacterPet pet = new CharacterPet(character,
-                    targetApostle.get().getCharacter(),
+                        targetApostle.get().character,
                     character.getProgression().getLevel() - 5,
                     character.getProgression().getLevel() /4);
                 var model = JtwigModel.newModel()

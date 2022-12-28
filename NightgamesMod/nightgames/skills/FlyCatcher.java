@@ -48,7 +48,7 @@ public class FlyCatcher extends Skill {
             writeOutput(c, Result.normal, targetPet.get());
             double m = Global.random(30, 50);
             targetPet.get().pain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.physical, targetPet.get(), m));
-            getSelf().weaken(c, getSelf().getStamina().max() / 4);
+            getSelf().weaken(c, getSelf().stamina.max() / 4);
             return true;
         } else {
             writeOutput(c, Result.normal, target);

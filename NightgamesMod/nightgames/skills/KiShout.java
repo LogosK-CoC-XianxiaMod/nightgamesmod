@@ -50,12 +50,12 @@ public class KiShout extends Skill {
             writeOutput(c, Result.normal, target);
             target.pain(c, getSelf(), (int) (10 + 3 * Math.sqrt(getSelf().get(Attribute.Ki))));
             target.add(c, new Falling(target));
-            getSelf().weaken(c, getSelf().getStamina().max() / 4);
+            getSelf().weaken(c, getSelf().stamina.max() / 4);
             return true;
         } else {
             writeOutput(c, Result.miss, target);
             target.pain(c, getSelf(), (int) (10 + 3 * Math.sqrt(getSelf().get(Attribute.Ki))));
-            getSelf().weaken(c, getSelf().getStamina().max() / 4);
+            getSelf().weaken(c, getSelf().stamina.max() / 4);
             return false;
         }
     }

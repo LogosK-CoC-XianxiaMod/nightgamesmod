@@ -8,7 +8,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.requirements.Requirement;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static nightgames.requirements.RequirementShortcuts.eitherinserted;
@@ -21,14 +23,14 @@ public class TailFucked extends Status implements InsertedStatus {
         super(hole.equals("ass") ? "Tail Pegged" : "Tail Fucked", affected);
         target = hole;
         this.other = other;
-        requirements.add(eitherinserted());
+        ((ArrayList<Requirement>)requirements).add(eitherinserted());
         flag(Stsflag.bound);
         flag(Stsflag.debuff);
         flag(Stsflag.tailfucked);
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         BodyPart hole = affected.body.getRandom(target);
         BodyPart tail = other.body.getRandom(TailPart.TYPE);
         if (hole == null || tail == null) {

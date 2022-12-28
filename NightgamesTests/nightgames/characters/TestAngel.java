@@ -73,10 +73,10 @@ public class TestAngel extends BasePersonality {
     }
 
     public TestAngel() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public TestAngel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public TestAngel(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("TestAngel", true);
         setupCharacter(this,charConfig, commonConfig);
     }
@@ -95,7 +95,7 @@ public class TestAngel extends BasePersonality {
 
         self.add(Trait.undisciplined);
         self.add(Trait.lickable);
-        self.setTrophy(Item.AngelTrophy);
+        self.trophy = Item.AngelTrophy;
         self.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(.1, 4.2));
@@ -199,14 +199,14 @@ public class TestAngel extends BasePersonality {
             r = Global.random(4);
             if (r == 1) {
                 if (character.has(Trait.fitnessNut)) {
-                    character.getStamina().gain(1);
+                    character.stamina.gain(1);
                 }
-                character.getStamina().gain(1);
+                character.stamina.gain(1);
             } else if (r == 3) {
                 if (character.has(Trait.expertGoogler)) {
-                    character.getArousal().gain(4);
+                    character.arousal.gain(4);
                 }
-                character.getArousal().gain(6);
+                character.arousal.gain(6);
             } else if (r == 2) {
                 if (character.has(Trait.mojoMaster)) {
                     character.getMojo().gain(1);
@@ -416,7 +416,7 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50;
     }
 
     public void advance() {

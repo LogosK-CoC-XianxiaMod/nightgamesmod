@@ -29,7 +29,7 @@ public class Distorted extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s image is now distorted.\n", affected.nameOrPossessivePronoun());
     }
 

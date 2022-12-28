@@ -31,7 +31,7 @@ public class Drowsy extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return "Your head feels woozy, as if you've just woken up.";
     }
 

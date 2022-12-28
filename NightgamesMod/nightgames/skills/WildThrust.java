@@ -54,7 +54,7 @@ public class WildThrust extends Thrust {
         int results[] = new int[2];
 
         int m = 5 + Global.random(20) + Math
-                        .min(getSelf().get(Attribute.Animism), getSelf().getArousal().getReal() / 30);
+                        .min(getSelf().get(Attribute.Animism), getSelf().arousal.getReal() / 30);
         int mt = 5 + Global.random(20);
         mt = Math.max(1, mt);
 
@@ -66,19 +66,18 @@ public class WildThrust extends Thrust {
     }
 
     private void modBreeder(Combat c, Character p, Character target, int results[]) {
-        Optional<Addiction> addiction = p.getAddiction(AddictionType.BREEDER);
-        if (!addiction.isPresent()) {
+        Addiction addiction = p.getAddiction(AddictionType.BREEDER);
+        if (addiction == null) {
             return;
         }
 
-        Addiction add = addiction.get();
-        if (add.wasCausedBy(target)) {
+        if (addiction.wasCausedBy(target)) {
             //Increased recoil vs Kat
-            results[1] *= 1 + ((float) add.getSeverity().ordinal() / 3.f);
+            results[1] *= 1 + ((float) addiction.getSeverity().ordinal() / 3.f);
             p.addict(c, AddictionType.BREEDER, target, Addiction.LOW_INCREASE);
         } else {
             //Increased damage vs everyone else
-            results[0] *= 1 + ((float) add.getSeverity().ordinal() / 3.f);
+            results[0] *= 1 + ((float) addiction.getSeverity().ordinal() / 3.f);
         }
     }
 

@@ -39,7 +39,7 @@ public class Stunned extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now stunned.\n", affected.subjectAction("are", "is"));
     }
 
@@ -66,7 +66,7 @@ public class Stunned extends DurationStatus {
                 affected.addlist.add(new Braced(affected, 2));
             }
             affected.addlist.add(new Wary(affected, 2));
-            affected.heal(c, affected.getStamina().max() / 3, " (Recovered)");
+            affected.heal(c, affected.stamina.max() / 3, " (Recovered)");
         }
     }
 

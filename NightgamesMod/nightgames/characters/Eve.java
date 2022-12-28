@@ -39,10 +39,10 @@ public class Eve extends BasePersonality {
     public static final String EVE_SECONDTYPE_DONE = "EveSecondFocusDone";
     
     public Eve() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Eve(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Eve(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Eve", false);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -65,14 +65,14 @@ public class Eve extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Speed, 1);
         self.modAttributeDontSaveData(Attribute.Seduction, 2);
         Global.gainSkills(self);
-        self.setTrophy(Item.EveTrophy);
+        self.trophy = Item.EveTrophy;
         self.body.add(new BreastsPart(BreastsPart.Size.DCup));
         self.body.add(new CockPart(Size.Big));
         self.body.add(new PussyPart());
         self.getMojo().setMax(120);
 
-        self.getStamina().setMax(90);
-        self.getArousal().setMax(80);
+        self.stamina.setMax(90);
+        self.arousal.setMax(80);
         // somewhat androgynous face
         self.body.add(new FacePart(.1, .9));
         self.initialGender = CharacterSex.shemale;
@@ -441,7 +441,7 @@ public class Eve extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50;
     }
 
     @Override

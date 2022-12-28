@@ -365,7 +365,7 @@ public class Command extends Skill {
                     c.write(getSelf(), "The phallic toy vibrates softly but insistently, "
                                     + "obviously designed to make the recepient squeal.");
                 }
-                getSelf().getOutfit()
+                getSelf().outfit
                          .equip(Clothing.getByID("strapon"));
                 getSelf().buildMojo(c, 10);
                 break;

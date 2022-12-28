@@ -27,8 +27,8 @@ public enum Stage {
          *           At half Willpower: ~67% 
          *           At no Willpower: 50%
          */
-        double will = ch.getWillpower().percent();
-        double arousal = ch.getArousal().percent();
+        double will = ch.willpower.percent();
+        double arousal = ch.arousal.percent();
 
         if (arousal <= will / 2)
             return FOREPLAY;
@@ -46,7 +46,7 @@ public enum Stage {
         if (target == REGULAR)
             return 0.0;
 
-        return arousalFactor * (AROUSAL_PIVOT - ch.getArousal()
+        return arousalFactor * (AROUSAL_PIVOT - ch.arousal
                                                   .percent());
     }
 

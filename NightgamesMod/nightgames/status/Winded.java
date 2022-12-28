@@ -36,7 +36,7 @@ public class Winded extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now winded.\n", affected.subjectAction("are", "is"));
     }
 
@@ -65,7 +65,7 @@ public class Winded extends DurationStatus {
                 }
             }
             affected.addlist.add(new Wary(affected, 3));
-            affected.heal(c, affected.getStamina().max(), " (Recovered)");
+            affected.heal(c, affected.stamina.max(), " (Recovered)");
         }
     }
 

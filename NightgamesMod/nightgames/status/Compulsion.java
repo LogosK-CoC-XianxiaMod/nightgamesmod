@@ -26,7 +26,7 @@ public class Compulsion extends DurationStatus implements Compulsive {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return Global.format("{other:SUBJECT-ACTION:have|has} placed a compulsion on"
                         + " {self:name-possessive} mind!", affected, compeller);
     }

@@ -92,8 +92,8 @@ public class Fuck extends Skill {
 
     protected String premessage(Combat c, Character target) {
         String premessage = "";
-        Clothing underwear = getSelf().getOutfit().getSlotAt(ClothingSlot.bottom, 0);
-        Clothing bottom = getSelf().getOutfit().getSlotAt(ClothingSlot.bottom, 1);
+        Clothing underwear = getSelf().outfit.getSlotAt(ClothingSlot.bottom, 0);
+        Clothing bottom = getSelf().outfit.getSlotAt(ClothingSlot.bottom, 1);
         String bottomMessage;
 
         if (underwear != null && bottom != null) {

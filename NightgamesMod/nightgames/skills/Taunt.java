@@ -47,7 +47,7 @@ public class Taunt extends Skill {
             target.add(c, new Shamed(target));
         }
         if (c.getStance().dom(getSelf()) && getSelf().has(Trait.bitingwords)) {
-            int willpowerLoss = Math.max(target.getWillpower().max() / 50, 3) + Global.random(3);
+            int willpowerLoss = Math.max(target.willpower.max() / 50, 3) + Global.random(3);
             target.loseWillpower(c, willpowerLoss, 0, false, " (Biting Words)");
         }
         if (getSelf().has(Trait.commandingvoice) && Global.random(3) == 0) {

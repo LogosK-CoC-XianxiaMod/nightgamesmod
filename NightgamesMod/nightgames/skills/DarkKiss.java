@@ -44,7 +44,7 @@ public class DarkKiss extends Skill {
                         + " has imbued you with stirs, and greedily draws %s willpower in through your connection, growing"
                         + " more powerful.", target.nameOrPossessivePronoun(), target.possessiveAdjective()));
 
-        Addiction add = getSelf().getAddiction(AddictionType.CORRUPTION).orElseThrow(() -> new SkillUnusableException(this));
+        Addiction add = getSelf().getAddiction(AddictionType.CORRUPTION);
         float mag = add.getMagnitude();
         int min = (int) (mag * 3);
         int mod = (int) (mag * 8);

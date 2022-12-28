@@ -173,13 +173,13 @@ public class Decider {
                 return resupplyAction.get();
             }
         }
-        if (character.getArousal().percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
+        if (character.arousal.percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
             var masturbateAction = available.stream().filter(act -> act instanceof Masturbate.Instance).findAny();
             if (masturbateAction.isPresent()) {
                 return masturbateAction.get();
             }
         }
-        if (character.getStamina().percent() <= 60 || character.getArousal().percent() >= 30) {
+        if (character.stamina.percent() <= 60 || character.arousal.percent() >= 30) {
             var batheAction = searchForAction(available, character, act -> act instanceof Bathe.Instance);
             if (batheAction.isPresent()) {
                 return batheAction.get();
@@ -244,6 +244,7 @@ public class Decider {
             }
         }
         Action.Instance[] actions = tactic.toArray(new Action.Instance[tactic.size()]);
+        if (actions.length == 0) return null;
         return actions[Global.random(actions.length)];
     }
 
@@ -346,8 +347,8 @@ public class Decider {
             return clonedCombat.getP1Character();
         } else if (c.getP2Character() == self) {
             return clonedCombat.getP2Character();
-        } else if (c.getOtherCombatants().contains(self)) {
-            return clonedCombat.getOtherCombatants().stream().filter(other -> other.equals(self)).findAny().get();
+        } else if (c.getPetCombatants().contains(self)) {
+            return clonedCombat.getPetCombatants().stream().filter(other -> other.equals(self)).findAny().get();
         } else {
             throw new IllegalArgumentException("Tried to use a badly cloned combat");
         }
@@ -365,11 +366,7 @@ public class Decider {
                     Combat c, double selfFit, double otherFit, CustomEffect effect) {
         // Clone ourselves a new combat... This should clone our characters, too
         Combat c2;
-        try {
-            c2 = c.clone();
-        } catch (CloneNotSupportedException e) {
-            return 0;
-        }
+        c2 = c.clone();
 
         Global.debugSimulation += 1;
         Character newSkillUser = getCopyFromCombat(c, c2, skillUser);

@@ -52,7 +52,7 @@ public class ReverseXHFDaisyChainThreesome extends FemdomSexStance {
 
     @Override
     public void checkOngoing(Combat c) {
-        if (!c.getOtherCombatants().contains(domSexCharacter)) {
+        if (!c.getPetCombatants().contains(domSexCharacter)) {
             c.write(bottom, Global.format("With the disappearance of {self:name-do}, {other:subject-action:continue} to fuck {self:direct-object} doggy style.", domSexCharacter, bottom));
             c.setStance(new Doggy(top, bottom));
         }

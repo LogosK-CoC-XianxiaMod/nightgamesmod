@@ -83,7 +83,7 @@ public class Jumped extends FemdomSexStance {
 
     @Override
     public void checkOngoing(Combat c) {
-        if (bottom.getStamina().get() < 2 && !top.has(Trait.petite)) {
+        if (bottom.stamina.get() < 2 && !top.has(Trait.petite)) {
             bottom.message("Your legs give out and you fall on the floor. " + top.getName() + " lands heavily on your lap.");
             top.message(Global.format("{other:SUBJECT-ACTION:lose} {other:possessive} balance and {other:action:fall},"
                     + " pulling {self:name-do} down on top of {other:direct-object}.", top, bottom));

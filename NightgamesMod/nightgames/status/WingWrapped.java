@@ -35,7 +35,7 @@ public class WingWrapped extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         String msg = "{other:NAME-POSSESSIVE} powerful {other:body-part:wings} are holding"
                         + " {self:name-do} in place";
         if (wrapper.has(Trait.VampireWings) && affected.outfit.slotEmpty(ClothingSlot.top)) {

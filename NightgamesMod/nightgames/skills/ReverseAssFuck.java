@@ -47,13 +47,13 @@ public class ReverseAssFuck extends Fuck {
         return fuckable(c, target) && c.getStance().mobile(getSelf()) && c.getStance().prone(target)
                         && !c.getStance().mobile(target) && getSelf().canAct() && getTargetOrgan(target).isReady(target)
                         && (getSelfOrgan().isReady(getSelf()) || getSelf().has(Item.Lubricant)
-                                        || getSelf().getArousal().percent() > 50 || getSelf().has(Trait.alwaysready));
+                                        || getSelf().arousal.percent() > 50 || getSelf().has(Trait.alwaysready));
     }
 
     @Override
     public boolean resolve(Combat c, Character target) {
         String premessage = premessage(c, target);
-        if (!getSelf().hasStatus(Stsflag.oiled) && getSelf().getArousal().percent() > 50
+        if (!getSelf().hasStatus(Stsflag.oiled) && getSelf().arousal.percent() > 50
                         || getSelf().has(Trait.alwaysready)) {
             String fluids = getSelf().hasDick() ? "copious pre-cum" : "own juices";
             if (premessage.isEmpty()) {

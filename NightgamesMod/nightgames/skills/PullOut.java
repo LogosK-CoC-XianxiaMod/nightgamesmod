@@ -42,12 +42,11 @@ public class PullOut extends Skill {
         if (!user.human()) {
             return false;
         }
-        Optional<Addiction> addiction = user.getAddiction(AddictionType.BREEDER);
-        if (!addiction.isPresent()) {
+        Addiction addiction = user.getAddiction(AddictionType.BREEDER);
+        if (addiction == null) {
             return false;
         }
-        Addiction add = addiction.get();
-        return add.atLeast(Severity.HIGH) || add.combatAtLeast(Severity.HIGH);
+        return addiction.atLeast(Severity.HIGH) || addiction.combatAtLeast(Severity.HIGH);
     }
 
     @Override

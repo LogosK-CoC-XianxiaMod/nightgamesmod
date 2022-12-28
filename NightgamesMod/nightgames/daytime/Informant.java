@@ -167,7 +167,7 @@ public class Informant extends Activity {
             .collect(Collectors.toList()));
         choices.addAll(Global.everyone().stream()
             .filter(c -> !c.human())
-            .filter(c -> Global.checkCharacterDisabledFlag(c) && !c.getType().equals("Yui"))
+            .filter(c -> Global.checkCharacterDisabledFlag(c) && !c.type.equals("Yui"))
             .map(character -> String.format(RETURN_PREFIX + "%s", character.getTrueName()))
             .collect(Collectors.toList()));
         choices.add("Back");
@@ -509,11 +509,10 @@ public class Informant extends Activity {
     
     private void getAddictionHelp() {
         Addiction add = Global.getPlayer()
-                        .getStrongestAddiction()
-                        .get();
+                        .getStrongestAddiction();
         String message = "You tell Aesop about the feelings you've been having"
                           + " lately, asking if he can do anything to help. <i>" +
-                          Global.format(add.informantsOverview(), add.affected, add.getCause());
+                          Global.format(add.informantsOverview(), add.affected, add.cause);
         if (!Global.checkFlag(Flag.AddictionAdvice)) {
             message += "\n\nAnyway, if you want to get rid of it, I might have got an address for you."
                             + " Being as kind as I am, I'll give it to you for free. You know, help"

@@ -27,7 +27,7 @@ public class Tolerance extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s built a tolerance to addictive fluids.\n", affected.subjectAction("have", "has"));
     }
 

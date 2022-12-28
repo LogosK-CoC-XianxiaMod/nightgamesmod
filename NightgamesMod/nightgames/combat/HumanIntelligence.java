@@ -22,23 +22,27 @@ public class HumanIntelligence implements Intelligence {
 
     @Override
     public boolean act(Combat c, Character target) {
-        HashSet<Skill> available = new HashSet<>();
+        HashSet<Skill> available = new HashSet<>(character.getSkills());
+        HashSet<Skill> unavailable = new HashSet<>();
         HashSet<Skill> cds = new HashSet<>();
-        for (Skill a : character.getSkills()) {
+        System.out.println("Generated usable skills: " + character.getSkills().stream().map(Skill::getName).collect(Collectors.joining()));
+        Skill.filterAllowedSkills(c, available, character, target);
+        for (Skill a : available) {
             if (Skill.isUsable(c, a)) {
                 if (character.cooldownAvailable(a)) {
-                    available.add(a);
+
                 } else {
                     cds.add(a);
+                    unavailable.add(a);
                 }
-            }
+            } else { unavailable.add(a); }
         }
         HashMap<Tactics, HashSet<Skill>> skillMap = new HashMap<>();
-        Skill.filterAllowedSkills(c, available, character, target);
         if (available.size() == 0) {
             available.add(new Nothing(character));
         }
         available.addAll(cds);
+        available.removeAll(unavailable);
         available.forEach(skill -> {
             if (!skillMap.containsKey(skill.type(c))) {
                 skillMap.put(skill.type(c), new HashSet<>());

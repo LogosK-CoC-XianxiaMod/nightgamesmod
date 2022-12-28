@@ -46,7 +46,7 @@ public class Honeypot extends Skill {
             double m = Global.random(10, 25);
             targetPet.get().body.pleasure(getSelf(), getSelf().body.getRandomHands(),
                             targetPet.get().body.getRandomGenital(), m, c);
-            getSelf().arouse(getSelf().getArousal().max() / 4, c);
+            getSelf().arouse(getSelf().arousal.max() / 4, c);
         return true;
         } else {
             writeOutput(c, Result.normal, target);

@@ -32,7 +32,7 @@ public class Primed extends Status {
     }
     
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         if (isPrimed(affected, 1))
             return "";
         return String.format("%s storing time charges.", affected.subjectAction("are", "is"));

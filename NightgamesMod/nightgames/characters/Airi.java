@@ -40,13 +40,13 @@ public class Airi extends BasePersonality {
     private static final String AIRI_REPLICATION_FOCUS = "AiriReplicationFocus";
     private static final String AIRI_TENTACLES_FOCUS = "AiriTentaclesFocus";
 
-    private Optional<ArmManager> armManager;
+    private ArmManager armManager;
 
     public Airi() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Airi(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Airi(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Airi", false);
         character.plan = Plan.retreating;
         character.mood = Emotion.nervous;
@@ -57,7 +57,7 @@ public class Airi extends BasePersonality {
     @Override
     public void applyBasicStats(Character self) {
         self.change();
-        self.setTrophy(Item.AiriTrophy);
+        self.trophy = Item.AiriTrophy;
 
         self.outfitPlan.add(Clothing.getByID("shirt"));
         self.outfitPlan.add(Clothing.getByID("bra"));
@@ -72,10 +72,10 @@ public class Airi extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Cunning, 2);
         self.modAttributeDontSaveData(Attribute.Speed, -1);
         self.modAttributeDontSaveData(Attribute.Seduction, 6);
-        self.getStamina().setMax(50);
-        self.getArousal().setMax(80);
+        self.stamina.setMax(50);
+        self.arousal.setMax(80);
         self.getMojo().setMax(100);
-        self.getWillpower().setMax(80);
+        self.willpower.setMax(80);
         self.initialGender = CharacterSex.female;
         self.body.add(new FacePart(.1, 3.0));
         self.body.add(new AssPart(Size.Normal));
@@ -92,9 +92,9 @@ public class Airi extends BasePersonality {
         ai.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             if (self.has(Trait.slime)) {
                 return "<i>\"Ahhnn... forgot how good... feels... Will return favor...\"</i>.";
-            } else if (self.getWillpower().percent() > 90) {
+            } else if (self.willpower.percent() > 90) {
                 return "<i>\"Aah that was a bit too much! Slow down a bit...\"</i>";
-            } else if (self.getWillpower().percent() > 75) {
+            } else if (self.willpower.percent() > 75) {
                 return "<i>\"Aaahhh... my head's feeling fuzzy...\"</i>";
             } else {
                 return "<i>\"I need more... Give me more...\"</i>";
@@ -180,7 +180,7 @@ public class Airi extends BasePersonality {
                             return true;
                         }),
                         new CombatSceneChoice("Transform?", (c, self, other) -> {
-                            List<Character> lovers = Global.getMatchParticipantsInAffectionOrder().stream().filter(pa -> !pa.getType().equals(getType())).collect(Collectors.toList());
+                            List<Character> lovers = Global.getMatchParticipantsInAffectionOrder().stream().filter(pa -> !pa.type.equals(getType())).collect(Collectors.toList());
                             Character lover = Global.getCharacterByType(new Angel().getType());
                             if (!lovers.isEmpty()) {
                                 lover = lovers.get(0);
@@ -188,27 +188,27 @@ public class Airi extends BasePersonality {
                             String loverBodyString = "face";
                             String loverFormString = "familiar young {other:man}";
                             String loverTalkString = "says in a perfect replica of {other:name-possessive} voice,";
-                            if (lover.getType().equals(Angel.class.getSimpleName())) {
+                            if (lover.type.equals(Angel.class.getSimpleName())) {
                                 loverBodyString = "glamorous body";
                                 loverFormString = "blonde beauty";
                                 loverTalkString = "purrs in {other:name-possessive} haughty voice,";
-                            } else if (lover.getType().equals(Cassie.class.getSimpleName())) {
+                            } else if (lover.type.equals(Cassie.class.getSimpleName())) {
                                 loverBodyString = "soft, lovely body";
                                 loverFormString = "brown haired {other:girl}";
                                 loverTalkString = "speaks in {other:name-possessive} soft voice,";
-                            } else if (lover.getType().equals(Jewel.class.getSimpleName())) {
+                            } else if (lover.type.equals(Jewel.class.getSimpleName())) {
                                 loverBodyString = "sleek, trained form";
                                 loverFormString = "powerful redhead";
                                 loverTalkString = "demands in {other:name-possessive} confident alto,";
-                            } else if (lover.getType().equals(Mara.class.getSimpleName())) {
+                            } else if (lover.type.equals(Mara.class.getSimpleName())) {
                                 loverBodyString = "petite lithe limbs";
                                 loverFormString = "black beauty";
                                 loverTalkString = "asks in {other:name-possessive} mischevious voice,";
-                            } else if (lover.getType().equals(Kat.class.getSimpleName())) {
+                            } else if (lover.type.equals(Kat.class.getSimpleName())) {
                                 loverBodyString = "cute cat ears";
                                 loverFormString = "lovely kitten";
                                 loverTalkString = "inquires in {other:name-possessive} hesistant voice,";
-                            } else if (lover.getType().equals(Reyka.class.getSimpleName())) {
+                            } else if (lover.type.equals(Reyka.class.getSimpleName())) {
                                 loverBodyString = "devilishly beautiful visage";
                                 loverFormString = "familiar seductive form";
                                 loverTalkString = "tempts in {other:name-possessive} melodious voice,";
@@ -427,7 +427,7 @@ public class Airi extends BasePersonality {
     public void resolveOrgasm(Combat c, NPC self, Character opponent, BodyPart selfPart, BodyPart opponentPart, int times, int totalTimes) {
         int orgasmsToUnmask = self.has(Trait.Masquerade) ? 2 : 1;
         boolean unmaskable = self.is(Stsflag.disguised) && self.orgasms >= orgasmsToUnmask;
-        if (times == totalTimes && ((self.getWillpower().percent() < 60 && !self.has(Trait.slime)) || unmaskable)) {
+        if (times == totalTimes && ((self.willpower.percent() < 60 && !self.has(Trait.slime)) || unmaskable)) {
             boolean unmasked = false;
             if (unmaskable) {
                 var model = JtwigModel.newModel()
@@ -486,11 +486,11 @@ public class Airi extends BasePersonality {
             if (self.getProgression().getLevel() >= 52) {
                 self.addTemporaryTrait(Trait.strongwilled, 999);
             }
-            if (self.has(Trait.Pseudopod) && armManager.isEmpty()) {
+            if (self.has(Trait.Pseudopod) && armManager == null) {
                 var m = new ArmManager();
                 initializeArms(m);
                 c.write(self, "<b>"+m.getActiveArms().size() + " tentacle arms erupt out of " + self.possessiveAdjective() + " back!</b>");
-                armManager = Optional.of(m);
+                armManager = m;
             }
             if (unmasked && self.has(Trait.ThePrestige) && c.getStance().distance() < 2) {
                 var template = JtwigTemplate.inlineTemplate(
@@ -527,7 +527,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        armManager = Optional.empty();
+        armManager = null;
         Character opponent = c.getOpponentCharacter(character);
         character.arousal.renew();
         opponent.arousal.renew();
@@ -715,7 +715,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-        armManager = Optional.empty();
+        armManager = null;
         return "Fighting Airi is not easy. Her stickiness makes it"
                         + " quite difficult for you to accomplish much of anything. Still, "
                         + "considering her incoherent babbling she's probably not got much fight left in her. "
@@ -747,7 +747,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        armManager = Optional.empty();
+        armManager = null;
         return "[Placeholder] You make each other cum at the same time. Sorry.";
 
     }
@@ -764,7 +764,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String victory3p(Combat c, Character target, Character assist) {
-        armManager = Optional.empty();
+        armManager = null;
         if (target.human()) {
             return "Airi crawls over to you at an agonizing pace. Her slime rapidly flows on top of your penis and covers it in a sticky bulb. <i>\"Time… for you to cum…\"</i><br/><br/>"
                             + "Her previously still slime suddenly starts to frantically squeeze and knead your cock, pulsating in waves of sticky goo on top of you. Startled by the sudden stimulation, you cum in seconds, spilling the proof of your defeat inside her tendril.<br/><br/>";
@@ -778,7 +778,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String intervene3p(Combat c, Character target, Character assist) {
-        armManager = Optional.empty();
+        armManager = null;
         var interveneIntro = JtwigTemplate.inlineTemplate("Your fight with "
             + "{{ other.getName() }} seemed to have ran into a stalemate. Neither of you "
             + "is willing to get close enough to each other for anything substantial "
@@ -807,8 +807,8 @@ public class Airi extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50
-                        || character.getArousal().percent() > 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50
+                        || character.arousal.percent() > 50;
     }
 
     public void advance() {
@@ -836,9 +836,9 @@ public class Airi extends BasePersonality {
             } else {
                 return super.image();
             }
-        } else if (character.getWillpower().percent() > 90) {
+        } else if (character.willpower.percent() > 90) {
             return "airi/portraits/human.jpg";
-        } else if (character.getWillpower().percent() > 75) {
+        } else if (character.willpower.percent() > 75) {
             return "airi/portraits/mostly_human.jpg";
         } else {
             return "airi/portraits/mostly_slime.jpg";
@@ -857,7 +857,7 @@ public class Airi extends BasePersonality {
         new TentacledMod());
 
     @Override
-    void initializeArms(ArmManager manager) {
+    public void initializeArms(ArmManager manager) {
         if (character.has(Trait.Pseudopod) && character.has(Trait.slime)) {
             manager.addArm(new TentacleClinger(manager));
             if (character.getProgression().getLevel() >= 58 && character.has(Trait.Imposter)) {
@@ -877,7 +877,7 @@ public class Airi extends BasePersonality {
     }
 
     @Override
-    Optional<ArmManager> getArmManager() {
+    public ArmManager getArmManager() {
         return armManager;
     }
 }

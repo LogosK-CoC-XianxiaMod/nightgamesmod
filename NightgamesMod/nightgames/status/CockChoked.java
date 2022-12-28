@@ -22,7 +22,7 @@ public class CockChoked extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now preventing %s from cumming.\n", other.subjectAction("are", "is"),
                         affected.subject());
     }
@@ -34,7 +34,7 @@ public class CockChoked extends DurationStatus {
 
     @Override
     public float fitnessModifier() {
-        if (affected.getArousal().percent() > 80) {
+        if (affected.arousal.percent() > 80) {
             return -10;
         }
         return 0;
@@ -53,7 +53,7 @@ public class CockChoked extends DurationStatus {
     @Override
     public int regen(Combat c) {
         super.regen(c);
-        if (affected.getArousal().percent() > 80) {
+        if (affected.arousal.percent() > 80) {
             affected.emote(Emotion.desperate, 10);
             affected.emote(Emotion.horny, 10);
         }

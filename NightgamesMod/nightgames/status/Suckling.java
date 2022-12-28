@@ -32,7 +32,7 @@ public class Suckling extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s fighting an urge to drink from %s nipples.\n", affected.subjectAction("are", "is"),
                         skill.getSelf().nameOrPossessivePronoun());
     }

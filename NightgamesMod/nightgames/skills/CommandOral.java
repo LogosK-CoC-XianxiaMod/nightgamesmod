@@ -30,7 +30,7 @@ public class CommandOral extends PlayerCommand {
     @Override
     public boolean resolve(Combat c, Character target) {
         boolean silvertongue = target.has(Trait.silvertongue);
-        boolean lowStart = getSelf().getArousal().get() < 15;
+        boolean lowStart = getSelf().arousal.get() < 15;
         int m = (silvertongue ? 8 : 5) + Global.random(10);
         if (getSelf().human()) {
             if (lowStart) {

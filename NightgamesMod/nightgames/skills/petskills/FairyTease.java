@@ -37,7 +37,7 @@ public class FairyTease extends SimpleEnemySkill {
             } else if (target.hasDick() && !c.getStance().penisInserted(target) ) {
                 c.write(getSelf(), Global.format("{self:SUBJECT} slips into {other:name-possessive} %s and plays with "
                                 + "{other:possessive} penis until {other:pronoun-action:manage|manages} to remove {self:direct-object}.",
-                                getSelf(), target, target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()));
+                                getSelf(), target, target.outfit.getTopOfSlot(ClothingSlot.bottom).getName()));
                 target.body.pleasure(getSelf(), getSelf().body.getSkin(), target.body.getRandomCock(), m, c);
             } else if (target.breastsAvailable()) {
                 c.write(getSelf(), Global.format("{self:SUBJECT} hugs {other:name-possessive} chest and rubs {other:possessive} nipples with "
@@ -48,7 +48,7 @@ public class FairyTease extends SimpleEnemySkill {
             } else {
                 c.write(getSelf(), Global.format("{self:SUBJECT} slips into {other:name-possessive} %s and plays with "
                                 + "{other:possessive} sensitive nipples until {other:pronoun-action:manage|manages} to remove {self:direct-object}.",
-                                getSelf(), target, target.getOutfit().getTopOfSlot(ClothingSlot.top).getName()));
+                                getSelf(), target, target.outfit.getTopOfSlot(ClothingSlot.top).getName()));
                 target.body.pleasure(getSelf(), getSelf().body.getSkin(), target.body.getRandomBreasts(), m, c);
             }
         } else {

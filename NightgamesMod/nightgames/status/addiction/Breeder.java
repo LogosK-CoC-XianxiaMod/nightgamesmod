@@ -13,6 +13,8 @@ import nightgames.global.Global;
 import nightgames.status.Horny;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Breeder extends Addiction {
        
@@ -25,18 +27,20 @@ public class Breeder extends Addiction {
         this(affected, cause, .01f);
     }
 
+    @NotNull
     @Override
-    protected Optional<Status> withdrawalEffects() {
-        return Optional.of(new Horny(affected, 5.f * getSeverity().ordinal(), 999, affected.possessiveAdjective() + " animal instincts"));
+    protected Status withdrawalEffects() {
+        return new Horny(affected, 5.f * getSeverity().ordinal(), 999, affected.possessiveAdjective() + " animal instincts");
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
+    protected Status addictionEffects() {
         if (atLeast(Severity.HIGH))
             flag(Stsflag.feral);
         else
             unflag(Stsflag.feral);
-        return Optional.of(this);
+        return this;
     }
 
     @Override
@@ -134,8 +138,8 @@ public class Breeder extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return "Arousal rages through your body at the sight of " + c.getOpponentCharacter(affected).getName()
                             + ", expecting a well-earned fuck.";
         }
@@ -169,7 +173,7 @@ public class Breeder extends Addiction {
     @Override
     public void tick(Combat c) {
         super.tick(c);
-        if (inWithdrawal) {
+        if (isInWithdrawal) {
             affected.arouse(Math.round(magnitude * 5), c, " (Breeding Instincts)");
             affected.emote(Emotion.horny, 20);
         }

@@ -48,7 +48,7 @@ public class RemoveBomb extends Skill {
                 writeOutput(c, Result.normal, target);
                 getSelf().removeStatus(Stsflag.bombed);
             }
-        } else if (Global.random(100) < getSelf().getStamina().percent()) {
+        } else if (Global.random(100) < getSelf().stamina.percent()) {
             writeOutput(c, Result.normal, target);
             getSelf().removeStatus(Stsflag.bombed);
         } else {

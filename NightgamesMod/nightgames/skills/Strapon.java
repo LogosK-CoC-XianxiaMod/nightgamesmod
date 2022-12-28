@@ -43,7 +43,7 @@ public class Strapon extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        List<Clothing> unequipped = getSelf().getOutfit().equip(Clothing.getByID("strapon"));
+        List<Clothing> unequipped = getSelf().outfit.equip(Clothing.getByID("strapon"));
         if (unequipped.isEmpty()) {
             if (getSelf().human()) {
                 c.write(getSelf(), Global.capitalizeFirstLetter(deal(c, 0, Result.normal, target)));

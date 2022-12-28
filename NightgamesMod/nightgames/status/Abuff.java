@@ -33,10 +33,10 @@ public class Abuff extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         int newValue;
-        if (replacement.isPresent()) {
-            newValue = ((Abuff)replacement.get()).value;
+        if (replacement != null) {
+            newValue = ((Abuff)replacement).value;
         } else {
             newValue = this.value;
         }

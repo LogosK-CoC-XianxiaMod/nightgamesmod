@@ -56,13 +56,13 @@ public class AddictionRemoval extends Activity {
             Global.gui().message("Nervously, you handed over the money for the overload treatment. You don't"
                             + " remember what happened next, but you do know that now your addiction is far"
                             + " stronger than before. Let's hope this works.");
-            Global.getPlayer().getStrongestAddiction().get().overload();
+            Global.getPlayer().getStrongestAddiction().overload();
         } else if (choice.equals(SAFE_OPT)) {
             player.money -= 15000;
             Global.gui().message("You dole out the mountain of cash and are taken to the back for your treatment."
                             + " When you emerge, you are completely free of your addiction.");
             //FIXME: Currently doesn't work 100%. Many addiction features still stick after this is used. - DSM
-            Global.getPlayer().removeStatusImmediately(Global.getPlayer().getStrongestAddiction().get());
+            Global.getPlayer().removeStatusImmediately(Global.getPlayer().getStrongestAddiction());
             //FIXME: If the strongest Addiction is 0 and from Airi - does it still return from the above line?
         } else if (choice.equals("Leave")) {
             done(true);

@@ -20,7 +20,7 @@ public class Sore extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now sore.\n", affected.subjectAction("are", "is"));
     }
 
@@ -43,7 +43,7 @@ public class Sore extends DurationStatus {
     public int regen(Combat c) {
         super.regen(c);
         affected.emote(Emotion.nervous, 10);
-        return -affected.getStamina().max() / 20;
+        return -affected.stamina.max() / 20;
     }
 
     @Override

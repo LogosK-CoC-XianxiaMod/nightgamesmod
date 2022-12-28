@@ -40,7 +40,7 @@ public class Plasticized extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         if (affected.human()) {
             return "<b>You are wrapped in a layer of hard plastic and are completely immobilized!</b>";
         } else {

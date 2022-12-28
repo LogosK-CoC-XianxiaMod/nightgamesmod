@@ -124,11 +124,11 @@ public class AssJob extends Skill {
     }
 
     private boolean selfNakedOrUnderwear() {
-        return getSelf().getOutfit().slotEmptyOrMeetsCondition(ClothingSlot.bottom, c -> c.getLayer() == 0);
+        return getSelf().outfit.slotEmptyOrMeetsCondition(ClothingSlot.bottom, c -> c.getLayer() == 0);
     }
 
     private boolean selfWearingUnderwear() {
-        return getSelf().getOutfit().getSlotAt(ClothingSlot.bottom, 0) != null;
+        return getSelf().outfit.getSlotAt(ClothingSlot.bottom, 0) != null;
     }
 
     @Override
@@ -216,7 +216,7 @@ public class AssJob extends Skill {
                                                     target.objectPronoun(),
                                                     target.possessiveAdjective(),
                                     selfWearingUnderwear()
-                                                    ? "with "+getSelf().possessiveAdjective()+" soft " + getSelf().getOutfit()
+                                                    ? "with "+getSelf().possessiveAdjective()+" soft " + getSelf().outfit
                                                                     .getBottomOfSlot(ClothingSlot.bottom).getName()
                                                     : "in "+getSelf().possessiveAdjective()+" luscious crack");
                 } else {

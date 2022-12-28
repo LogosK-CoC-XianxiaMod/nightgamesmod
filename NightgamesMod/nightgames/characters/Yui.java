@@ -28,10 +28,10 @@ public class Yui extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
 
     public Yui() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Yui(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Yui(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         // Yui is a start character so that you can gain affection with her straight off the bat.
         // She is disabled when the game starts
         super("Yui", true);
@@ -55,14 +55,14 @@ public class Yui extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Perception, 1);
         character.modAttributeDontSaveData(Attribute.Ninjutsu, 1);
         character.modAttributeDontSaveData(Attribute.Speed, 2);
-        character.getStamina().setMax(100);
-        character.getArousal().setMax(90);
+        character.stamina.setMax(100);
+        character.arousal.setMax(90);
         character.getProgression().setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(130);
 
-        character.setTrophy(Item.YuiTrophy);
+        character.trophy = Item.YuiTrophy;
         character.body.add(new BreastsPart(Size.CCup));
         character.initialGender = CharacterSex.female;
     }
@@ -77,8 +77,8 @@ public class Yui extends BasePersonality {
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        preferredAttributes.add(c -> c.get(Attribute.Ninjutsu) < 60 && c.getProgression().getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());
-        preferredAttributes.add(c -> c.get(Attribute.Cunning) < 50 ? Optional.of(Attribute.Cunning) : Optional.empty());
+        preferredAttributes.add((Character c) -> c.get(Attribute.Ninjutsu) < 60 && c.getProgression().getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());
+        preferredAttributes.add((Character c) -> c.get(Attribute.Cunning) < 50 ? Optional.of(Attribute.Cunning) : Optional.empty());
 
         character.getGrowth().addTrait(0, Trait.obedient);
         character.getGrowth().addTrait(0, Trait.cute);
@@ -110,7 +110,7 @@ public class Yui extends BasePersonality {
     }
 
     @Override
-    public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
+    public Action.Instance move(Collection<? extends Action.Instance> available, Collection<Area> radar) {
         for (var act : available) {
             if (act instanceof Energize.Instance) {
                 return act;
@@ -295,25 +295,25 @@ public class Yui extends BasePersonality {
 
     @Override
     public String intervene3p(Combat c, Character target, Character assist) {
-        return target.human()?"Your fight with " + assist.getName() + " has barely started when you hear a familiar voice call out to you. <i>\"Master! I was hoping you would be here.\"</i> " 
-                        + "Before you can react, Yui grabs you and eagerly kisses you on the lips. Your surprise quickly gives way to extreme lightheadedness and drowsiness. " 
-                        + "Your legs give out and you collapse into her arms. Did Yui drug you? <i>\"Please forgive this betrayal, Master. You work so hard fighting and training " 
+        return target.human()?"Your fight with " + assist.getName() + " has barely started when you hear a familiar voice call out to you. <i>\"Master! I was hoping you would be here.\"</i> "
+                        + "Before you can react, Yui grabs you and eagerly kisses you on the lips. Your surprise quickly gives way to extreme lightheadedness and drowsiness. "
+                        + "Your legs give out and you collapse into her arms. Did Yui drug you? <i>\"Please forgive this betrayal, Master. You work so hard fighting and training "
                         + "every night. For the sake of your health, I thought it was neccessary to make you take a break.\"</i> "
                         + "She sounds genuinely apologetic, but also a little excited. <br/><i>\"Don\'t worry. We\'ll take good care of you until you can move again.\"</i> "
                         + "She carefully lowers your limp upper body onto her lap as " + assist.getName() + " fondles your dick to full hardness. "
                         + "<i>\"I\'m sure we can relieve some of your built up stress too.\"</i><br/>"
                         :
-                            "This fight could certainly have gone better than this. You\'re completely naked and have your hands bound behind your back. " 
+                            "This fight could certainly have gone better than this. You\'re completely naked and have your hands bound behind your back. "
                         + target.getName() + " is just taking " + "her time to finish you off. A familiar voice calls out to her. <i>\"I see you\'ve caught my master. "
                                         + "I\'ve always wanted to get him in this position.\"</i> You " + "both surprised to see Yui standing nearby. "
-                                        + "She hadn\'t made a sound when she approached. <i>\"Do you mind if I play with him for a moment? I promise I " 
+                                        + "She hadn\'t made a sound when she approached. <i>\"Do you mind if I play with him for a moment? I promise I "
                                         + "won\'t make him cum.\"</i> ";
     }
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50
-                        && character.getArousal().percent() <= 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50
+                        && character.arousal.percent() <= 50;
     }
 
     @Override

@@ -35,10 +35,10 @@ public class Kat extends BasePersonality {
     private static final long serialVersionUID = -8169646189131720872L;
 
     public Kat() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Kat(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Kat(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Kat", false);
         character.plan = Plan.retreating;
         character.mood = Emotion.confident;
@@ -57,13 +57,13 @@ public class Kat extends BasePersonality {
         self.outfitPlan.add(Clothing.getByID("sneakers"));
         self.outfitPlan.add(Clothing.getByID("socks"));
         self.change();
-        self.setTrophy(Item.KatTrophy);
+        self.trophy = Item.KatTrophy;
         self.modAttributeDontSaveData(Attribute.Power, 1);
         self.modAttributeDontSaveData(Attribute.Animism, 1);
         self.modAttributeDontSaveData(Attribute.Cunning, 1);
         self.modAttributeDontSaveData(Attribute.Speed, 1);
-        self.getStamina().setMax(100);
-        self.getArousal().setMax(100);
+        self.stamina.setMax(100);
+        self.arousal.setMax(100);
         self.getMojo().setMax(80);
 
         self.body.add(new BreastsPart(BreastsPart.Size.ACup));
@@ -344,7 +344,7 @@ public class Kat extends BasePersonality {
         });
 
         addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
-            if (self.getArousal()
+            if (self.arousal
                     .percent() >= 50) {
                 return "Kat makes no effort to hide the moisture streaming down her thighs. <i>\"You want my pussy? I'm nyot going to myake it easy for you.\"</i>";
             } else {
@@ -607,13 +607,13 @@ public class Kat extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return !character.mostlyNude() && character.getStamina().percent() >= 50
-                        || character.getArousal().percent() > 50;
+        return !character.mostlyNude() && character.stamina.percent() >= 50
+                        || character.arousal.percent() > 50;
     }
 
     @Override
     public boolean checkMood(Combat c, Emotion mood, int value) {
-        if (character.getArousal().percent() >= 50) {
+        if (character.arousal.percent() >= 50) {
             if (!character.is(Stsflag.feral)) {
                 character.add(c, new Feral(character));
             }

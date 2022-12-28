@@ -1,5 +1,6 @@
 package nightgames.status;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import com.google.gson.JsonObject;
@@ -9,6 +10,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+import nightgames.requirements.Requirement;
 import nightgames.requirements.RequirementShortcuts;
 
 public class LegLocked extends Status {
@@ -16,10 +18,10 @@ public class LegLocked extends Status {
 
     public LegLocked(Character affected, float dc) {
         super("Leg Locked", affected);
-        requirements.add(RequirementShortcuts.eitherinserted());
-        requirements.add(RequirementShortcuts.dom());
-        requirements.add((c, self, other) -> toughness > .01);
-        requirements.add((c, self, other) -> other.canRespond());
+        ((ArrayList<Requirement>)requirements).add(RequirementShortcuts.eitherinserted());
+        ((ArrayList<Requirement>)requirements).add(RequirementShortcuts.dom());
+        ((ArrayList<Requirement>)requirements).add((c, self, other) -> toughness > .01);
+        ((ArrayList<Requirement>)requirements).add((c, self, other) -> other.canRespond());
         toughness = dc;
         flag(Stsflag.leglocked);
         flag(Stsflag.debuff);
@@ -37,7 +39,7 @@ public class LegLocked extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s being held down.\n", affected.subjectAction("are", "is"));
     }
 

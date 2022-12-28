@@ -26,7 +26,7 @@ public class IceStance extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now in a ice stance.\n", affected.subjectAction("are", "is"));
     }
 

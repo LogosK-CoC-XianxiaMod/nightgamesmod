@@ -36,11 +36,11 @@ public class Edge extends Skill {
                         getSelf().has(Trait.limbTraining1)) {
             mod += .5f;
         }
-        if (c.getOpponentCharacter(getSelf()).getArousal().percent() >= 100
-                        && c.getOpponentCharacter(getSelf()).getArousal().percent() < 300) {
+        if (c.getOpponentCharacter(getSelf()).arousal.percent() >= 100
+                        && c.getOpponentCharacter(getSelf()).arousal.percent() < 300) {
             mod *= 2;
         }
-        if (getSelf().getArousal().percent() >= 80) {
+        if (getSelf().arousal.percent() >= 80) {
             mod /= 3;
         }
         return mod;
@@ -65,7 +65,7 @@ public class Edge extends Skill {
                             + " {other:name-possessive} {other:body-part:cock}, but "
                             + "{other:pronoun} "+target.action("succeed", "succeeds")+" in keeping them well away.", getSelf(), target));
             return false;
-        } else if (target.getArousal().percent() < 100) {
+        } else if (target.arousal.percent() < 100) {
             c.write(getSelf(), Global.format("{self:SUBJECT-ACTION:jerk|jerks} {other:name-possessive}"
                             + " {other:body-part:cock} slowly yet deliberately with both hands.", getSelf(), target));
         } else {
@@ -76,7 +76,7 @@ public class Edge extends Skill {
                             + "{other:PRONOUN-ACTION:<i>do</i>|<i>does</i>} thrash around a lot, trying desperately"
                             + " to get that little bit of extra stimulation, and it's draining"
                             + " {other:possessive} energy quite rapidly.", getSelf(), target));
-            target.weaken(c, Math.min(30, Global.random((target.getArousal().percent() - 100) / 10)));
+            target.weaken(c, Math.min(30, Global.random((target.arousal.percent() - 100) / 10)));
         }
         target.temptWithSkill(c, getSelf(), getSelf().body.getRandomHands(), 20 + Global.random(8), this);
         target.emote(Emotion.horny, 30);

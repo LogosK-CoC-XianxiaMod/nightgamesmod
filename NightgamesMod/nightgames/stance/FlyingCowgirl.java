@@ -89,7 +89,7 @@ public class FlyingCowgirl extends FemdomSexStance {
 
     @Override
     public void checkOngoing(Combat c) {
-        if (top.getStamina().get() < 5) {
+        if (top.stamina.get() < 5) {
             if (top.human()) {
                 c.write("You're too tired to stay in the air. You plummet to the ground and " + bottom.getName()
                                 + " drops on you heavily, knocking the wind out of you.");

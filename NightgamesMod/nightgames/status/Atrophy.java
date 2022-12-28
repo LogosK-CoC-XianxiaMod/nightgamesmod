@@ -74,8 +74,8 @@ public class Atrophy extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        return String.format("%s %sweakening from %s.\n", affected.subjectAction("are", "is"), replacement.isPresent() ? "" : "now ",
+    public String initialMessage(Combat c, Status replacement) {
+        return String.format("%s %sweakening from %s.\n", affected.subjectAction("are", "is"), replacement != null ? "" : "now ",
                         source + " (" + Global.formatDecimal(magnitude) + " x " + getDuration() + ")");
     }
 

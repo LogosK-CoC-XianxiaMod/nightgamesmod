@@ -45,7 +45,7 @@ public class XHFDaisyChainThreesome extends MaledomSexStance {
 
     @Override
     public void checkOngoing(Combat c) {
-        if (!c.getOtherCombatants().contains(domSexCharacter)) {
+        if (!c.getPetCombatants().contains(domSexCharacter)) {
             c.write(bottom, Global.format("With the disappearance of {self:name-do}, {master:subject-action:continue} to ride {other:name-do} in a reverse cowgirl position.", domSexCharacter, bottom));
             c.setStance(new ReverseCowgirl(top, bottom));
         }

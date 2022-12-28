@@ -26,7 +26,7 @@ public class Prostrate extends Skill {
     public boolean usable(Combat c, Character target) {
         if (!getSelf().checkAddiction(AddictionType.ZEAL))
             return false;
-        return getSelf().getAddiction(AddictionType.ZEAL).map(a -> c.getStance().en == Stance.neutral && a.wasCausedBy(target)).orElse(false);
+        return getSelf().getAddiction(AddictionType.ZEAL).wasCausedBy(target) && c.getStance().en == Stance.neutral;
     }
 
     @Override

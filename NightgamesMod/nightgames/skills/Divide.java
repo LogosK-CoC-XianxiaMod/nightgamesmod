@@ -56,7 +56,7 @@ public class Divide extends Skill {
         int ac = 4 + power / 3;
         CharacterPet pet = null;
         String clonePrefix = String.format("%s clone", self.nameOrPossessivePronoun());
-        Set<String> existingNames = c.getOtherCombatants()
+        Set<String> existingNames = c.getPetCombatants()
                                       .stream().map(Character::getTrueName)
                                       .filter(name -> name.contains(clonePrefix))
                                       .collect(Collectors.toSet());

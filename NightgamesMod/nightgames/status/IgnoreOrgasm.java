@@ -14,8 +14,8 @@ public class IgnoreOrgasm extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (affected.getArousal().isAtUnfavorableExtreme()) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (affected.arousal.isAtUnfavorableExtreme()) {
             return affected.subjectAction("are", "is") + " overpowering the urge to cum";
         }
         return "";
@@ -23,7 +23,7 @@ public class IgnoreOrgasm extends DurationStatus {
 
     @Override
     public String describe(Character opponent) {
-        if (affected.getArousal().isAtUnfavorableExtreme()) {
+        if (affected.arousal.isAtUnfavorableExtreme()) {
             return affected.subjectAction("are", "is") + " overpowering the urge to cum";
         }
         return "";
@@ -46,7 +46,7 @@ public class IgnoreOrgasm extends DurationStatus {
 
     @Override
     public double pleasure(Combat c, BodyPart withPart, BodyPart targetPart, double x) {
-        if (affected.getArousal().isAtUnfavorableExtreme()) {
+        if (affected.arousal.isAtUnfavorableExtreme()) {
             return -x * 9 / 10;
         }
         return 0;

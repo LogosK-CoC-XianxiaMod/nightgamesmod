@@ -32,12 +32,12 @@ public class NpcConfiguration extends CharacterConfiguration {
         type = primaryConfig.type;
     }
 
-    public static Optional<NpcConfiguration> mergeOptionalNpcConfigs(Optional<NpcConfiguration> primaryConfig,
-                    Optional<NpcConfiguration> secondaryConfig) {
-        if (!primaryConfig.isPresent()) {
+    public static NpcConfiguration mergeOptionalNpcConfigs(NpcConfiguration primaryConfig,
+                    NpcConfiguration secondaryConfig) {
+        if (primaryConfig == null) {
             return secondaryConfig;
-        } else if (secondaryConfig.isPresent()) {
-            return Optional.of(new NpcConfiguration(primaryConfig.get(), secondaryConfig.get()));
+        } else if (secondaryConfig != null) {
+            return new NpcConfiguration(primaryConfig, secondaryConfig);
 
             } else {
                 return primaryConfig;

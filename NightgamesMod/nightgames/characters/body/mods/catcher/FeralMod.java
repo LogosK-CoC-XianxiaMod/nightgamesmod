@@ -25,7 +25,7 @@ public class FeralMod extends CatcherMod {
     }
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {
-            int chance = Math.max(5, 10 - self.getArousal().getReal() / 50);
+            int chance = Math.max(5, 10 - self.arousal.getReal() / 50);
             if (!self.is(Stsflag.frenzied) && !self.is(Stsflag.cynical) && target.isType(CockPart.TYPE)
                       && Global.random(chance) == 0) {
                 JtwigModel model = JtwigModel.newModel()

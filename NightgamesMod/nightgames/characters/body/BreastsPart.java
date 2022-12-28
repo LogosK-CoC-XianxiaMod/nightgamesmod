@@ -125,8 +125,8 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
     @Override
     public double getHotness(Character self, Character opponent) {
         double hotness = super.getHotness(self, opponent);
-        Clothing top = self.getOutfit().getTopOfSlot(ClothingSlot.top);
-        hotness += -.1 + Math.sqrt(getSize().value) * .15 * self.getOutfit()
+        Clothing top = self.outfit.getTopOfSlot(ClothingSlot.top);
+        hotness += -.1 + Math.sqrt(getSize().value) * .15 * self.outfit
                                                 .getExposure(ClothingSlot.top);
         if (!opponent.hasDick()) {
             hotness /= 2;
@@ -201,7 +201,7 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
                 float addictionLevel;
                 Addiction addiction;
                 opponent.addict(c, AddictionType.MAGIC_MILK, self, Addiction.LOW_INCREASE);
-                addiction = opponent.getAddiction(AddictionType.MAGIC_MILK).get();
+                addiction = opponent.getAddiction(AddictionType.MAGIC_MILK);
                 addictionLevel = addiction.getMagnitude();
                 if (addictionLevel < Addiction.LOW_THRESHOLD) {
                     // not addicted
@@ -254,7 +254,7 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
                 c.write(opponent,
                                 Global.format("The power seems to leave {other:name-possessive} body as {other:pronoun-action:sip|sips} {self:possessive} cloying cream.",
                                                 self, opponent));
-                opponent.weaken(c, opponent.getStamina().max() / 10);
+                opponent.weaken(c, opponent.stamina.max() / 10);
                 opponent.add(c, new Abuff(opponent, Attribute.Power, -Global.random(1, 3), 20));
             }
             if (self.has(Trait.Pacification)) {

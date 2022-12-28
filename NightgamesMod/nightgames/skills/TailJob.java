@@ -37,7 +37,7 @@ public class TailJob extends Skill {
     public boolean resolve(Combat c, Character target) {
         writeOutput(c, Result.normal, target);
         int m = (5 + Global.random(10))
-                        + Math.min(getSelf().getArousal().getReal() / 20, getSelf().get(Attribute.Animism));
+                        + Math.min(getSelf().arousal.getReal() / 20, getSelf().get(Attribute.Animism));
         String receiver;
         if (target.hasDick()) {
             receiver = CockPart.TYPE;

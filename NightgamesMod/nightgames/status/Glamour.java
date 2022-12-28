@@ -22,7 +22,7 @@ public class Glamour extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s surrounded %s with a arcane glamour.\n", affected.subjectAction("have", "has"), affected.reflexivePronoun());
     }
 

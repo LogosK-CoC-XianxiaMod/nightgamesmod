@@ -22,7 +22,7 @@ public class DarkChaos extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return ""; // explained in withdrawal message
     }
 
@@ -37,8 +37,8 @@ public class DarkChaos extends Status {
 
     @Override
     public void tick(Combat c) {
-        float odds = affected.getAddiction(AddictionType.CORRUPTION).map(Addiction::getMagnitude).orElse(0f)
-                        / 4;
+        Addiction corruption = affected.getAddiction(AddictionType.CORRUPTION);
+        float odds = corruption != null ? corruption.magnitude / 4 : 0f;
         if (odds > Math.random()) {
             Effect e = Effect.pick(c, affected);
             e.execute(c, affected);

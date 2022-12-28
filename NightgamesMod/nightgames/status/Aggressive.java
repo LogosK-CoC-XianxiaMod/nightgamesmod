@@ -36,7 +36,7 @@ public class Aggressive extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s now aggressive, and cannot use non-physical skills.",
                         affected.subjectAction("are", "is"));
     }

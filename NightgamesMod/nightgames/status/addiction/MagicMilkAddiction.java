@@ -9,6 +9,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MagicMilkAddiction extends Addiction {
 
@@ -22,22 +24,24 @@ public class MagicMilkAddiction extends Addiction {
         this(affected, cause, .01f);
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> withdrawalEffects() {
+    protected Status withdrawalEffects() {
         double mod = 1.0 / (double) getSeverity().ordinal();
-        affected.getWillpower().reduceCapacity(mod);
-        return Optional.empty();
+        affected.willpower.reduceCapacity(mod);
+        return null;
     }
 
     @Override
     public void endNight() {
         super.endNight();
-        affected.getWillpower().resetCapacity();
+        affected.willpower.resetCapacity();
     }
 
+    @Nullable
     @Override
-    protected Optional<Status> addictionEffects() {
-        return Optional.of(this);
+    protected Status addictionEffects() {
+        return this;
     }
 
     @Override
@@ -103,8 +107,8 @@ public class MagicMilkAddiction extends Addiction {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (inWithdrawal) {
+    public String initialMessage(Combat c, Status replacement) {
+        if (isInWithdrawal) {
             return "The burning thirst wells up at the sight of " + cause.getName() + ". It would be so easy to subdue,"
                         + " just a little sip...";
         }

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0-RC2'
 }
 
 javafx {
@@ -9,6 +10,14 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.web', 'javafx.swing' ]
 }
 
+jar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest {
+        attributes(
+                "Main-Class": "nightgames.global.Global"
+        )
+    }
+}
 
 repositories {
     jcenter()
@@ -16,11 +25,14 @@ repositories {
 }
 
 dependencies {
-    compile fileTree('NightgamesMod') { include '*.jar' }
-    compile fileTree('NightgamesTests') { include '*.jar' }
-    compile "org.jtwig:jtwig-core:5.87.0.RELEASE"
+    implementation fileTree('NightgamesMod') { include '*.jar' }
+    implementation fileTree('NightgamesTests') { include '*.jar' }
+    implementation "org.jtwig:jtwig-core:5.87.0.RELEASE"
     implementation 'uk.ac.abdn:SimpleNLG:4.4.8'
     testImplementation('junit:junit:4.12')
+    implementation "com.google.code.gson:gson:2.10"
+    implementation "org.openjfx:javafx-graphics:17:mac"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 sourceSets {
@@ -41,3 +53,13 @@ sourceSets {
 }
 
 mainClassName = 'nightgames.global.Global'
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

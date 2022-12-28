@@ -40,7 +40,7 @@ public class Shove extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         boolean success = true;
-        if (getSelf().get(Attribute.Ki) >= 1 && !target.getOutfit().slotUnshreddable(ClothingSlot.top)
+        if (getSelf().get(Attribute.Ki) >= 1 && !target.outfit.slotUnshreddable(ClothingSlot.top)
                         && getSelf().canSpend(5)) {
             writeOutput(c, Result.special, target);
             target.shred(ClothingSlot.top);
@@ -128,7 +128,7 @@ public class Shove extends Skill {
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
         return "You channel your ki into your hands and strike " + target.getName() + " in the chest, destroying her "
-                        + target.getOutfit().getTopOfSlot(ClothingSlot.top).getName() + ".";
+                        + target.outfit.getTopOfSlot(ClothingSlot.top).getName() + ".";
     }
 
     @Override
@@ -137,7 +137,7 @@ public class Shove extends Skill {
                         + "%s tears and falls off %s in tatters.", getSelf().subject(),
                         target.nameDirectObject(), getSelf().possessiveAdjective(),
                         target.possessiveAdjective(), target.nameOrPossessivePronoun(),
-                        target.getOutfit().getTopOfSlot(ClothingSlot.top).getName(),
+                        target.outfit.getTopOfSlot(ClothingSlot.top).getName(),
                         target.objectPronoun());
     }
 

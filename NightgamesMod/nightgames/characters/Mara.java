@@ -43,10 +43,10 @@ public class Mara extends BasePersonality {
     private ArmManager armManager;
 
     public Mara() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Mara(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Mara(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Mara", true);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -158,12 +158,12 @@ public class Mara extends BasePersonality {
         self.change();
         self.modAttributeDontSaveData(Attribute.Cunning, 2);
         self.modAttributeDontSaveData(Attribute.Perception, 2);
-        self.getStamina().setMax(80);
-        self.getArousal().setMax(80);
+        self.stamina.setMax(80);
+        self.arousal.setMax(80);
         self.getMojo().setMax(120);
 
         Global.gainSkills(self);
-        self.setTrophy(Item.MaraTrophy);
+        self.trophy = Item.MaraTrophy;
         self.body.add(new FacePart(.1, 1.1));
         self.body.add(new AssPart(Size.Normal));
         self.initialGender = CharacterSex.female;
@@ -645,7 +645,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public boolean fit() {
-        return character.getStamina().percent() >= 75 && character.getArousal().percent() <= 10
+        return character.stamina.percent() >= 75 && character.arousal.percent() <= 10
                         && !character.mostlyNude();
     }
 
@@ -799,7 +799,7 @@ public class Mara extends BasePersonality {
     }
 
     @Override
-    void initializeArms(ArmManager manager) {
+    public void initializeArms(ArmManager manager) {
         if (character.has(Trait.octo)) {
             if (character.getProgression().getLevel() < 30) {
                 if (Global.randomdouble() < .5) {
@@ -843,7 +843,7 @@ public class Mara extends BasePersonality {
     }
 
     @Override
-    Optional<ArmManager> getArmManager() {
-        return Optional.of(armManager);
+    public ArmManager getArmManager() {
+        return armManager;
     }
 }

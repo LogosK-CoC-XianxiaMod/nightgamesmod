@@ -179,8 +179,8 @@ public class Body implements Cloneable {
     }
 
     private String formatHotnessText(Character other) {
-        int topLayer = Optional.ofNullable(character.getOutfit().getTopOfSlot(ClothingSlot.top)).map(Clothing::getLayer).orElse(-1);
-        int bottomLayer = Optional.ofNullable(character.getOutfit().getTopOfSlot(ClothingSlot.bottom)).map(Clothing::getLayer).orElse(-1);
+        int topLayer = Optional.ofNullable(character.outfit.getTopOfSlot(ClothingSlot.top)).map(Clothing::getLayer).orElse(-1);
+        int bottomLayer = Optional.ofNullable(character.outfit.getTopOfSlot(ClothingSlot.bottom)).map(Clothing::getLayer).orElse(-1);
         JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/hotness_text.twig");
         JtwigModel model = JtwigModel.newModel()
             .with("self", character)
@@ -268,7 +268,7 @@ public class Body implements Cloneable {
         for (BodyPart part : getCurrentParts()) {
             bodyHotness += part.getHotness(character, opponent) * (getFetish(part.getType()).isPresent() ? 2 : 1);
         }
-        double clothingHotness = character.getOutfit().getHotness();
+        double clothingHotness = character.outfit.getHotness();
         double totalHotness = bodyHotness * (.5 + character.getExposure()) + clothingHotness;
         if (character.is(Stsflag.glamour)) {
             totalHotness += 2.0;
@@ -446,7 +446,7 @@ public class Body implements Cloneable {
 
         boolean unsatisfied = false;
         if (character.has(Trait.Unsatisfied)
-            && (character.getArousal().percent() >= 50)
+            && (character.arousal.percent() >= 50)
             && (skill == null || !skill.getTags(c).contains(SkillTag.fucking))
             && !(with.isGenitalOrToy() && target.isGenitalOrToy() && c.getStance().havingSex(c))) {
             if (c != null && c.getOpponentCharacter(character).human()) {
@@ -495,9 +495,9 @@ public class Body implements Cloneable {
         if (skill != null) {
             pleasureResolveStaleness(c, opponent, skill, staleness);
         }
-        double percentPleasure = 100.0 * result / character.getArousal().max();
+        double percentPleasure = 100.0 * result / character.arousal.max();
         pleasureResolveSexualDynamo(c, opponent, percentPleasure);
-        pleasureResolveShowmanship(c, opponent, percentPleasure, result, Optional.ofNullable(skill));
+        pleasureResolveShowmanship(c, opponent, percentPleasure, result, skill);
 
         character.resolvePleasure(result, c, opponent, target, with);
         pleasureResolveFetishTrainer(c, opponent, with);
@@ -666,7 +666,7 @@ public class Body implements Cloneable {
         }
     }
 
-    private void pleasureResolveShowmanship(Combat c, Character opponent, double percentPleasureDealt, int pleasureDamage, Optional<Skill> skill) {
+    private void pleasureResolveShowmanship(Combat c, Character opponent, double percentPleasureDealt, int pleasureDamage, Skill skill) {
         if (character.has(Trait.showmanship)
             && percentPleasureDealt >= 5
             && opponent.isPet()
@@ -744,7 +744,7 @@ public class Body implements Cloneable {
                 perceptionBonus += 1;
             }
             if (character.has(Trait.romantic)) {
-                perceptionBonus += Math.max(0, opponent.getArousal().percent() - 70) / 100.0;
+                perceptionBonus += Math.max(0, opponent.arousal.percent() - 70) / 100.0;
             }
 
             if (character.has(Trait.MindlessClone)) {

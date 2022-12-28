@@ -33,7 +33,7 @@ public class Maneuver extends Skill {
             if (target.roll(getSelf(), c, accuracy(c, target))) {
                 writeOutput(c, Result.special, target);
                 c.setStance(new Behind(getSelf(), target), getSelf(), true);
-                getSelf().weaken(c, getSelf().getStamina().get() / 10);
+                getSelf().weaken(c, getSelf().stamina.get() / 10);
                 getSelf().emote(Emotion.confident, 15);
                 getSelf().emote(Emotion.dominant, 15);
                 target.emote(Emotion.nervous, 10);
@@ -116,7 +116,7 @@ public class Maneuver extends Skill {
     }
 
     private boolean isFlashStep(Combat c) {
-        return getSelf().getStamina().percent() > 15 && getSelf().get(Attribute.Ki) >= 6;
+        return getSelf().stamina.percent() > 15 && getSelf().get(Attribute.Ki) >= 6;
     }
 
     @Override

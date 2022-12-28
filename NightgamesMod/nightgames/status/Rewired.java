@@ -31,7 +31,7 @@ public class Rewired extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return String.format("%s senses is now rewired.\n", affected.nameOrPossessivePronoun());
     }
 
@@ -42,7 +42,7 @@ public class Rewired extends DurationStatus {
 
     @Override
     public double pleasure(Combat c, BodyPart withPart, BodyPart targetPart, double x) {
-        affected.getStamina().exhaust((int) Math.round(x));
+        affected.stamina.exhaust((int) Math.round(x));
         return 0;
     }
 

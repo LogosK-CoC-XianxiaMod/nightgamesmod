@@ -181,7 +181,7 @@ public class Exercise extends Activity {
             if (Global.getNPC("Cassie").getAffection(player) >= 5) {
                 available.add(Scene.cassie1);
             }
-            if (Global.getNPC("Jewel").getAffection(player) >= 5 && player.getStamina().max() >= 35) {
+            if (Global.getNPC("Jewel").getAffection(player) >= 5 && player.stamina.max() >= 35) {
                 available.add(Scene.jewel1);
             }
         }

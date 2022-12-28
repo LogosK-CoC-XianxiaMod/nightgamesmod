@@ -2,6 +2,7 @@ package nightgames.combat;
 
 import nightgames.characters.Character;
 import nightgames.stance.Position;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,11 +57,10 @@ class CombatLog {
         }
     }
 
-    void logEnd(Optional<Character> winner) {
+    void logEnd(@Nullable Character winner) {
         StringBuilder sb = new StringBuilder("\nMATCH OVER: ");
-        if (winner.isPresent()) {
-            sb.append(winner.get()
-                            .getTrueName())
+        if (winner != null) {
+            sb.append(winner.getTrueName())
               .append(" WINS");
         } else {
             sb.append("DRAW");

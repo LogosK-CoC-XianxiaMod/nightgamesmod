@@ -65,8 +65,8 @@ public class HypnoVisorPlace extends Skill {
     }
     
     private boolean isInWithdrawal(Character target) {
-        Addiction add = target.getAddiction(AddictionType.MIND_CONTROL).orElse(null);
-        return add != null && add.atLeast(Severity.LOW) && add.isInWithdrawal();
+        Addiction add = target.getAddiction(AddictionType.MIND_CONTROL);
+        return add != null && add.atLeast(Severity.LOW) && add.isInWithdrawal;
     }
 
     private String addictionDesc(Combat c, Character target) {

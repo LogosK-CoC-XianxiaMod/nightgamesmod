@@ -93,7 +93,7 @@ public class PetCharacter extends Character {
                     Trait.tight);
     public PetCharacter(Pet self, String name, String type, Growth growth, int level) {
         super(name, 1);
-        this.ownerType = self.owner().getType();
+        this.ownerType = self.owner().type;
         this.self = self;
         this.type = type;
         this.setGrowth(growth);
@@ -111,8 +111,8 @@ public class PetCharacter extends Character {
         }
         this.getSkills().clear();
         this.mojo.setMax(100);
-        getStamina().renew();
-        getArousal().renew();
+        stamina.renew();
+        arousal.renew();
         getMojo().renew();
     }
 
@@ -218,7 +218,7 @@ public class PetCharacter extends Character {
     public void counterattack(Character target, Tactics type, Combat c) {}
 
     public boolean isPetOf(Character other) {
-        return other != null && !isDummy() && ownerType.equals(other.getType());
+        return other != null && !isDummy() && ownerType.equals(other.type);
     }
 
     public Pet getSelf() {
@@ -226,7 +226,7 @@ public class PetCharacter extends Character {
     }
     
     public double percentHealth() {
-        return Math.min(getStamina().percent(), getArousal().percent());
+        return Math.min(stamina.percent(), arousal.percent());
     }
 
     public boolean isPet() {

@@ -18,7 +18,7 @@ public class PheromoneBombed extends DurationStatus {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return Global.format("{self:SUBJECT} now {self:action:have|has} a %s sticking"
                         + " onto {self:possessive} chest.", affected, c.getOpponentCharacter(affected),
                         c.getOpponentCharacter(affected).human() ? "primed pheromone bomb" : "creepy-looking sphere");
@@ -64,7 +64,7 @@ public class PheromoneBombed extends DurationStatus {
                             + " smells <i>distinctly</i> of {other:subject}, and it is currently"
                             + " turbocharging every nerve in {self:name-possessive} body!</b>", affected,
                             c.getOpponentCharacter(affected)));
-            affected.arouse(affected.getArousal().max() / 4, c, "(Pheromone Bomb)");
+            affected.arouse(affected.arousal.max() / 4, c, "(Pheromone Bomb)");
             affected.addlist.add(new Frenzied(affected, 10));
             affected.addlist.add(new Hypersensitive(affected, 10));
         }

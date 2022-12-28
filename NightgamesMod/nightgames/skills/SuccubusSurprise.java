@@ -67,7 +67,7 @@ public class SuccubusSurprise extends Skill {
         new Grind(getSelf()).resolve(c, target);
 
         if (!getSelf().human() && target.human() && !oppHasBlessed
-                        && getSelf().getType().equals("CUSTOM_NPCSamantha")) {
+                        && getSelf().type.equals("CUSTOM_NPCSamantha")) {
             c.write(getSelf(), "<br/><br/>\"<i>Do you like your surprise, " + target.getName() + "? I do.\"</i>");
         }
         return true;

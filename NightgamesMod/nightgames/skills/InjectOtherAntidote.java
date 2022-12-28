@@ -33,7 +33,7 @@ public class InjectOtherAntidote extends Skill {
         } else {
             c.write(getSelf(), receive(c, 0, Result.normal, this.getSelf()));
         }
-        target.calm(c, target.getArousal().max() / 10);
+        target.calm(c, target.arousal.max() / 10);
         target.purge(c);
         getSelf().consume(Item.MedicalSupplies, 1);
 

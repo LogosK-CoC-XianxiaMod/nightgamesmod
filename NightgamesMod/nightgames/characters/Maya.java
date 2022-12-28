@@ -39,10 +39,10 @@ public class Maya extends BasePersonality {
     public static final String MAYA_SECONDTYPE_DONE = "MayaSecondFocusDone";
     
     public Maya(int playerLevel) {
-        this(playerLevel, Optional.empty(), Optional.empty());
+        this(playerLevel, null, null);
     }
 
-    public Maya(int playerLevel, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Maya(int playerLevel, NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Maya", false);
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
@@ -68,13 +68,13 @@ public class Maya extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Speed, 2);
         self.modAttributeDontSaveData(Attribute.Power, 7);
         self.modAttributeDontSaveData(Attribute.Hypnosis, 5);
-        self.getStamina().setMax(90);
-        self.getArousal().setMax(150);
+        self.stamina.setMax(90);
+        self.arousal.setMax(150);
         self.getMojo().setMax(150);
-        self.getWillpower().setMax(100);
+        self.willpower.setMax(100);
 
         Global.gainSkills(self);
-        self.setTrophy(Item.MayaTrophy);
+        self.trophy = Item.MayaTrophy;
 
         self.body.add(new BreastsPart(Size.DCup));
         self.initialGender = CharacterSex.female;

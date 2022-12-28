@@ -35,7 +35,7 @@ public class SetTrap extends Action {
         return trap.recipe(user) && !user.getLocation().open()
                 && trap.requirements(user)
                 && !user.getCharacter().bound()
-                && user.getLocation().getTrap().isEmpty();
+                && user.getLocation().getTrap() == null;
     }
 
     @Override

@@ -183,7 +183,7 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
 
     @Override
     public boolean isReady(Character c) {
-        return c.getArousal().percent() >= 15 || c.has(Trait.alwaysready);
+        return c.arousal.percent() >= 15 || c.has(Trait.alwaysready);
     }
 
     public String getFluidsNoMods(Character c) {
@@ -222,9 +222,9 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         b.append("There is a ");
         if (c.crotchAvailable()) {
             b.append(fullDescribe(c));
-            if (c.getArousal().percent() <= 15) {
+            if (c.arousal.percent() <= 15) {
                 b.append(" hanging between ");
-            } else if (c.getArousal().percent() <= 50 ) {
+            } else if (c.arousal.percent() <= 50 ) {
                 b.append(" erect between ");
             } else {
                 b.append(" proudly erect between ");
@@ -236,7 +236,7 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
             b.append(" bulge in ");
             b.append(c.possessiveAdjective());
             b.append(" ");
-            b.append(Optional.ofNullable(c.getOutfit().getTopOfSlot(ClothingSlot.bottom)).map(Clothing::getName).orElse("outfit"));
+            b.append(Optional.ofNullable(c.outfit.getTopOfSlot(ClothingSlot.bottom)).map(Clothing::getName).orElse("outfit"));
             b.append(" where ");
             b.append(c.possessiveAdjective());
             b.append(" crotch is.");

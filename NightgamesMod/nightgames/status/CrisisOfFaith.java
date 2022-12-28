@@ -19,7 +19,7 @@ public class CrisisOfFaith extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return ""; // explanation given in withdrawal message
     }
 
@@ -75,8 +75,8 @@ public class CrisisOfFaith extends Status {
 
     @Override
     public int gainmojo(int x) {
-        return (int) (x * (1.0f - affected.getAddiction(AddictionType.ZEAL).map(Addiction::getMagnitude)
-                        .orElse(0f)));
+        Addiction zeal = affected.getAddiction(AddictionType.ZEAL);
+        return (int) (x * (1.0f - (zeal != null ? zeal.magnitude : 0f)));
     }
 
     @Override

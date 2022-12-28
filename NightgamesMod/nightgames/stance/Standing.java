@@ -84,7 +84,7 @@ public class Standing extends MaledomSexStance {
 
     @Override
     public void checkOngoing(Combat c) {
-        if (top.getStamina().get() < 10) {
+        if (top.stamina.get() < 10) {
             top.message("Your legs give out and you fall on the floor. " + bottom.getName()
                     + " lands heavily on your lap.");
             bottom.message(Global.format("{self:SUBJECT-ACTION:lose} {self:possessive} balance and {self:action:fall}, "

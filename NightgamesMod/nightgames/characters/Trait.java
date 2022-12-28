@@ -8,14 +8,10 @@ import java.util.Map;
 import nightgames.global.Global;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
-import nightgames.status.Lethargic;
-import nightgames.status.Pheromones;
-import nightgames.status.Resistance;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.status.*;
 
 
-//TODO: Consider movine towards characters.CharTrait, which provides better handling and customization for traits. - DSM
+//TODO: Consider moving towards characters.CharTrait, which provides better handling and customization for traits. - DSM
 
 public enum Trait {
     sadist("Sadist", "Skilled at providing pleasure alongside pain",
@@ -115,7 +111,7 @@ public enum Trait {
                 if (c.breastsAvailable()) {
                     b.append("You occasionally see milk dribbling down her breasts. Is she lactating?");
                 } else {
-                    b.append("You notice a damp spot on her " + c.getOutfit().getTopOfSlot(ClothingSlot.top).getName()
+                    b.append("You notice a damp spot on her " + c.outfit.getTopOfSlot(ClothingSlot.top).getName()
                                     + ".");
                 }
             } else {
@@ -211,6 +207,9 @@ public enum Trait {
     carnalvirtuoso("Carnal Virtuoso", "Opponents cums twice"),
     toymaster("Toymaster", "Expert at using toys."),
 
+    // Must be declared before Lethargic
+    PersonalInertia("Personal Inertia", "Status effects (positive and negative) last 50% longer"),
+
     // Weaknesses
     ticklish("Ticklish", "Can be easily tickled into submission."), // more weaken damage and arousal from tickle
     insatiable("Insatiable", "One orgasm is never enough."), // arousal doesn't completely clear at end of match
@@ -224,7 +223,7 @@ public enum Trait {
     pussywhipped("Pussy Whipped", "Loves pussy far more than is healthy, always have a pussy fetish."), // Starts off each match with a pussy fetish
     cockcraver("Cock Craver", "Constantly thinking about cocks, always has a cock fetish."), // Starts off each match with a cock fetish
     immobile("Immobile", "Unable to move."), // Cannot move
-    lethargic("Lethargic", "Very low mojo gain from normal methods.", new Lethargic(null, 999, .75)), // 25% mojo gain
+    lethargic("Lethargic", "Very low mojo gain from normal methods.", new Lethargic(DurationStatus.dummyNPCForInit, 999, .75)), // 25% mojo gain
     hairtrigger("Hair Trigger", "Very quick to shoot. Not for beginners."),
     buttslut("Buttslut", "Extremely weak to anal pleasure."),
     obedient("Obedient", "Easy to order around."),
@@ -303,7 +302,6 @@ public enum Trait {
     Energetic("Energetic", "Regain stamina rapidly"),
     QuickRecovery("Quick Recovery", "Faster recovery from disabling effects"),
     Sneaky("Sneaky", "Easier time hiding and ambushing competitors"),
-    PersonalInertia("Personal Inertia", "Status effects (positive and negative) last 50% longer"),
     Confident("Confident", "Mojo decays slower out of combat"),
     SexualGroove("Sexual Groove", "Passive mojo gain every turn in combat"),
     BoundlessEnergy("Boundless Energy", "Increased passive stamina gain in battle"),
@@ -586,7 +584,7 @@ public enum Trait {
             return "";
         });
         resistances.put(Trait.mentalfortress, (combat, c, s) -> {
-           if (s.mindgames() && (c.getStamina().percent()*3 / 4) > Global.random(100)) {
+           if (s.mindgames() && (c.stamina.percent()*3 / 4) > Global.random(100)) {
                return "Mental Fortress";
            }
            return "";

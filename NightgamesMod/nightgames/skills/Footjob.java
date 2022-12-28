@@ -105,9 +105,9 @@ public class Footjob extends Skill {
             String message = "";
             if (target.hasDick()) {
                 message = "You press your foot against {other:name-possessive} girl-cock and stimulate it by rubbing it up and down with the sole of your foot, occasionally teasing the head with your toes. {other:POSSESSIVE} {other:body-part:cock}";
-                if (target.getArousal().percent() < 30) {
+                if (target.arousal.percent() < 30) {
                     message += "starts to get hard.";
-                } else if (target.getArousal().percent() < 60) {
+                } else if (target.arousal.percent() < 60) {
                     message += "throbs between your soles.";
                 } else {
                     message += "is practically leaking pre-cum all over your soles.";
@@ -115,9 +115,9 @@ public class Footjob extends Skill {
             } else if (target.hasPussy()) {
                 message = "You rub your foot against " + target.getName()
                                 + "'s pussy lips while rubbing {other:possessive} clit with your big toe. ";
-                if (target.getArousal().percent() < 30) {
+                if (target.arousal.percent() < 30) {
                     message += "The wetness from {other:possessive} excitement starts to coat the underside of your foot.";
-                } else if (target.getArousal().percent() < 60) {
+                } else if (target.arousal.percent() < 60) {
                     message += "{other:POSSESSIVE} {other:body-part:pussy} is so wet, your foot easily glides along {other:possessive} parted lips.";
                 } else {
                     message += "{other:PRONOUN} is so wet that your toes briefly slip inside of {other:direct-object} before pulling them out to tease {other:direct-object} further.";

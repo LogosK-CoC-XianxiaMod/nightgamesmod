@@ -14,7 +14,7 @@ public class SapphicSeduction extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return "";
     }
 

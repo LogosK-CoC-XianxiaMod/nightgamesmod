@@ -39,10 +39,10 @@ class GUICoreStatsBar extends JPanel {
     }
 
     void setTarget(NPC target) {
-        stamina.setTargetMeter(target.getStamina());
-        arousal.setTargetMeter(target.getArousal());
+        stamina.setTargetMeter(target.stamina);
+        arousal.setTargetMeter(target.arousal);
         mojo.setTargetMeter(target.getMojo());
-        willpower.setTargetMeter(target.getWillpower());
+        willpower.setTargetMeter(target.willpower);
     }
 
     void refresh() {

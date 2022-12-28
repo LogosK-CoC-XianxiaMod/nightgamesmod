@@ -24,10 +24,10 @@ public class Caroline extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
 
     public Caroline() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Caroline(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Caroline(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Caroline", false);
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
@@ -44,14 +44,14 @@ public class Caroline extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Cunning, 2);
         character.modAttributeDontSaveData(Attribute.Perception, 1);
         character.modAttributeDontSaveData(Attribute.Speed, 1);
-        character.getStamina().setMax(120);
-        character.getArousal().setMax(120);
+        character.stamina.setMax(120);
+        character.arousal.setMax(120);
         character.getProgression().setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(110);
 
-        character.setTrophy(Item.ExtremeAphrodisiac);
+        character.trophy = Item.ExtremeAphrodisiac;
         character.body.add(new BreastsPart(Size.BCup));
         character.initialGender = CharacterSex.female;
     }

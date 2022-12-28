@@ -26,7 +26,7 @@ public class HypnoVisor extends Status {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         return "The Hypno Visor comes to life, baragging you with images which you can't make sense"
                         + " of, but somehow just seem <i>right</i>.";
     }

@@ -21,10 +21,11 @@ public class Converted extends Abuff {
     }
 
     @Override
-    public String initialMessage(Combat c, Optional<Status> replacement) {
+    public String initialMessage(Combat c, Status replacement) {
         int newValue;
-        if (replacement.isPresent()) {
-            newValue = ((Converted)replacement.get()).value;
+        if (replacement != null) {
+
+            newValue = ((Converted)replacement).value;
         } else {
             newValue = this.value;
         }

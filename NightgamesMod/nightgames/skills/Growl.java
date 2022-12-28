@@ -25,7 +25,7 @@ public class Growl extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return !(target.is(Stsflag.wary) || target.is(Stsflag.charmed)) && getSelf().canAct() && getSelf().crotchAvailable() && target.crotchAvailable()
-                        && c.getStance().mobile(getSelf()) && getSelf().getArousal().percent() >= 20 && (target instanceof Player) && target
+                        && c.getStance().mobile(getSelf()) && getSelf().arousal.percent() >= 20 && (target instanceof Player) && target
             .checkAddiction(AddictionType.BREEDER);
     }
     
@@ -41,9 +41,9 @@ public class Growl extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (Global.random(target.getProgression().getLevel()) <= getSelf().get(Attribute.Animism) * ((Player)target).getAddiction(AddictionType.BREEDER).get().getMagnitude()
-                        * target.getArousal().percent() / 100 && !target.wary()) {
-            int damage = getSelf().getArousal().getReal() / 10;
+        if (Global.random(target.getProgression().getLevel()) <= getSelf().get(Attribute.Animism) * ((Player)target).getAddiction(AddictionType.BREEDER).getMagnitude()
+                        * target.arousal.percent() / 100 && !target.wary()) {
+            int damage = getSelf().arousal.getReal() / 10;
             if (damage < 10) {
                 damage = 0;
             }

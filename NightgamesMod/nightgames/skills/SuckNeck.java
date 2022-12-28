@@ -39,7 +39,7 @@ public class SuckNeck extends Skill {
     public boolean resolve(Combat c, Character target) {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (getSelf().get(Attribute.Dark) >= 1) {
-                int m = target.getStamina().max() / 8;
+                int m = target.stamina.max() / 8;
                 if (c.getStance().en == Stance.oralpin) {
                     writeOutput(c, Result.critical, target);
                     m *= 1.25;

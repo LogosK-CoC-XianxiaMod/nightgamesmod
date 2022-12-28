@@ -42,7 +42,7 @@ public class MouthPart extends GenericBodyPart {
         if (!fluid.isEmpty() && opponent.has(Trait.lacedjuices)) {
             c.write(self, Global.capitalizeFirstLetter(opponent.nameOrPossessivePronoun()) + " drug-laced " + fluid
                             + " leaves " + self.nameOrPossessivePronoun() + " entire body tingling with arousal.");
-            self.arouse(Math.max(opponent.getArousal().get() / 10, 5), c);
+            self.arouse(Math.max(opponent.arousal.get() / 10, 5), c);
         }
         if (!fluid.isEmpty() && opponent.has(Trait.frenzyingjuices) && Global.random(5) == 0) {
             c.write(self, Global.capitalizeFirstLetter(opponent.nameOrPossessivePronoun()) + " madness-inducing "
@@ -92,7 +92,7 @@ public class MouthPart extends GenericBodyPart {
                 opponent.add(c, new Trance(opponent));
             }
             bonus += Global.random(3) + Global.clamp(self.get(Attribute.Seduction) / 3, 10, 30)
-                            * self.getArousal().percent() / 100.0;
+                            * self.arousal.percent() / 100.0;
         }
         if (self.has(Trait.sweetlips) && c.getStance().sub(self)) {
             c.write(opponent, Global.format("<br/>{self:name-possessive} enticing lips turns {other:direct-object} on as {other:subject-action:force|forces} {other:reflective} into them.",

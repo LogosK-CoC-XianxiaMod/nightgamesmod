@@ -63,7 +63,7 @@ public class TentacleTrap extends Trap {
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
-                target.getCharacter().tempt(target.getCharacter().getArousal().max());
+                target.getCharacter().tempt(target.getCharacter().arousal.max());
                 target.getCharacter().addNonCombat(new Status(new Oiled(target.getCharacter())));
                 target.getCharacter().addNonCombat(new Status(new Hypersensitive(target.getCharacter())));
                 target.getLocation().opportunity(target.getCharacter(), this);

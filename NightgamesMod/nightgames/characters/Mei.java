@@ -24,10 +24,10 @@ public class Mei extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
 
     public Mei() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
-    public Mei(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public Mei(NpcConfiguration charConfig, NpcConfiguration commonConfig) {
         super("Mei", false);
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
@@ -45,14 +45,14 @@ public class Mei extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Cunning, 1);
         character.modAttributeDontSaveData(Attribute.Perception, 1);
         character.modAttributeDontSaveData(Attribute.Speed, 1);
-        character.getStamina().setMax(100);
-        character.getArousal().setMax(150);
+        character.stamina.setMax(100);
+        character.arousal.setMax(150);
         character.getProgression().setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(110);
 
-        character.setTrophy(Item.ExtremeAphrodisiac);
+        character.trophy = Item.ExtremeAphrodisiac;
         character.body.add(new BreastsPart(Size.BCup));
         character.initialGender = CharacterSex.female;
     }

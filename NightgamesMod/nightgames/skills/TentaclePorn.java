@@ -27,7 +27,7 @@ public class TentaclePorn extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return !target.wary() && !c.getStance().sub(getSelf()) && !c.getStance().prone(getSelf())
-                        && !c.getStance().prone(target) && getSelf().canAct() && getSelf().getArousal().get() >= 20;
+                        && !c.getStance().prone(target) && getSelf().canAct() && getSelf().arousal.get() >= 20;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Finger extends Skill {
     public boolean usable(Combat c, Character target) {
         return c.getStance().reachBottom(getSelf())
                         && (target.crotchAvailable() || getSelf().has(Trait.dexterous)
-                                        && target.getOutfit().getTopOfSlot(ClothingSlot.bottom).getLayer() <= 1)
+                                        && target.outfit.getTopOfSlot(ClothingSlot.bottom).getLayer() <= 1)
                         && target.hasPussy() && getSelf().canAct() && !c.getStance().vaginallyPenetrated(c, target);
     }
 
@@ -90,12 +90,12 @@ public class Finger extends Skill {
                             + "'s legs, not really knowing what you're doing. You don't know where she's the most sensitive, so you rub and "
                             + "stroke every bit of moist flesh under your fingers.";
         } else {
-            if (target.getArousal().get() <= 15) {
+            if (target.arousal.get() <= 15) {
                 return "You softly rub the petals of " + target.getName() + "'s closed flower.";
-            } else if (target.getArousal().percent() < 50) {
+            } else if (target.arousal.percent() < 50) {
                 return target.getName()
                                 + "'s sensitive lower lips start to open up under your skilled touch and you can feel her becoming wet.";
-            } else if (target.getArousal().percent() < 80) {
+            } else if (target.arousal.percent() < 80) {
                 return "You locate " + target.getName()
                                 + "'s clitoris and caress it directly, causing her to tremble from the powerful stimulation.";
             } else {
@@ -119,15 +119,15 @@ public class Finger extends Skill {
                             getSelf().subject(), target.subjectAction("are", "is"), getSelf().pronoun(),
                             target.possessiveAdjective(), getSelf().possessiveAdjective());
         } else {
-            if (target.getArousal().get() <= 15) {
+            if (target.arousal.get() <= 15) {
                 return String.format("%s softly rubs the petals of %s closed flower.",
                                 getSelf().subject(), target.nameOrPossessivePronoun());
-            } else if (target.getArousal().percent() < 50) {
+            } else if (target.arousal.percent() < 50) {
                 return String.format("%s sensitive lower lips start to open up under"
                                 + " %s skilled touch and %s can feel %s becoming wet.",
                                 target.nameOrPossessivePronoun(), getSelf().nameOrPossessivePronoun(),
                                 target.pronoun(), target.reflexivePronoun());
-            } else if (target.getArousal().percent() < 80) {
+            } else if (target.arousal.percent() < 80) {
                 return String.format("%s locates %s clitoris and caress it directly, causing"
                                 + " %s to tremble from the powerful stimulation.",
                                 getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun());

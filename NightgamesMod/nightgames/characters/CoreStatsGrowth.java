@@ -25,8 +25,8 @@ public class CoreStatsGrowth {
     };
 
     void levelUp(Character c) {
-        stamina.levelUp(c.getStamina());
-        arousal.levelUp(c.getArousal());
-        willpower.levelUp(c.getWillpower());
+        stamina.levelUp(c.stamina);
+        arousal.levelUp(c.arousal);
+        willpower.levelUp(c.willpower);
     }
 }
